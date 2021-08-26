@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "killall -9 node; clear; node app.js",
+    "dev": "killall -9 node; clear; nodemon app.js"
   },
   "keywords": [],
   "author": "",
