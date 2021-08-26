@@ -2,7 +2,9 @@ Hello, {{name}} ;-)) <br>
 {{#if name}}<a href="/user/logOut">Выйти</a>
 
 <img src="{{img}}">
+{{#if auth}}
+{{else}} <div>Вы зарегистрированы в системе, ожидайте подтверждения регистрации администратором</div>
+{{/if}}
 
-
-{{else}} <a href="/user/signIn">Войти</a>
+{{else}} Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в Google</a>
 {{/if}}

@@ -4,6 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 const hbs = require('hbs');
 const path = require('path');
+const flash = require('connect-flash');
+
 //session
 const redis = require('redis');
 const session = require('express-session');
@@ -14,30 +16,18 @@ const redisClient = redis.createClient();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth')
   .OAuth2Strategy;
-const flash = require('connect-flash');
 
-
+  const { checkUser } = require('./middlewares/checkUser');
+  const { checkSuper } = require('./middlewares/checkSuper');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
+const indexRouter = require('./routes/index');
 const clientsRouter = require('./routes/clients');
 const ordersRouter = require('./routes/orders');
 const adminRouter = require('./routes/admin');
-
-
-
-
-
-function checkAuth() {
-  return app.use((req, res, next) => {
-    if (req.user) next()
-    else res.redirect('/login');
-  });
-}
-
 
 
 passport.serializeUser((user, done) => done(null, user))
@@ -57,6 +47,7 @@ app.use(
     saveUninitialized: false,
     secret: process.env.SESSIONSECRET,
     resave: false,
+    cookie: { maxAge: 60000 * 60 * +process.env.cookieHours },
   }),
 );
 
@@ -86,8 +77,10 @@ app.use(express.json());
 
 module.exports = passport;
 
-app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/', indexRouter);
+app.use(checkUser);
+app.use(checkSuper);
 app.use('/clients', clientsRouter);
 app.use('/orders', ordersRouter);
 app.use('/admin', adminRouter);

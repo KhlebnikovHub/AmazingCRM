@@ -1,19 +1,20 @@
 const router = require('express').Router();
 
-
+const { initUser } = require('../middlewares/initUser');
 
 
 
 
 
 router.route('/')
-.get(async (req, res) => {
+.get(initUser, async (req, res) => {
 
-  console.log('MAIN>>>>>>>>>>>>>>>', 'REQ. USER', req.user);
-  console.log('REQ. SEEESION', req.session.passport.user);
+  console.log('MAIN>>>>>>>>>>>>>>>', 'REQ. USER', req?.user);
+  console.log('REQ. SEEESION', req.session?.passport?.user);
   if(req?.session?.passport) {
   res.locals.name = req.session.passport.user.displayName;
   res.locals.img = req.session.passport.user.photos[0].value;
+  res.locals.auth = req.session.passport.user?.moderator;
   console.log('I\'m HERE! +=)+');
   console.log(res.locals.name);   
 }
