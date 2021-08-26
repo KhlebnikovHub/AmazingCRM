@@ -1,13 +1,23 @@
 {{!-- {{#if user}} --}}
 <div class="helloUser">
   <div class="helloUser-hello">
+    {{#if name}}
     <h1>Добро пожаловать,<br>{{name}}!</h1>
+    <h5>{{#if auth}}
+{{else}} <div>Вы зарегистрированы в системе, ожидайте подтверждения регистрации администратором</div>
+{{/if}}</h5>
+
+{{else}}
+<h5>Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в Google</a> </h5>
+{{/if}}
+
+{{#if name}}
   </div>
   <div class="helloUser-photo">
     <h1><img src="{{img}}"></h1>
   </div>
 </div>
-
+{{#if auth}}
 <div class="heading">
   <h1 class="heading__title">Статистика</h1>
   <p class="heading__credits"><a class="heading__link" target="_blank" href="#">по заказам</a>
@@ -26,5 +36,7 @@
   </div>
   {{/each}}
 </div>
+{{/if}}
+{{/if }}
 {{!-- {{else}} <a href="/user/signIn">Войти</a> --}}
 {{!-- {{/if}} --}}
