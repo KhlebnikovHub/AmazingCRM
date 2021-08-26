@@ -11,7 +11,7 @@ const { initUser } = require('../middlewares/initUser');
 
 router.route('/')
   .get(initUser, async (req, res) => {
-
+    
     console.log('MAIN>>>>>>>>>>>>>>>', 'REQ. USER', req?.user);
     console.log('REQ. SEEESION', req.session?.passport?.user);
     if (req?.session?.passport) {
@@ -22,7 +22,10 @@ router.route('/')
       console.log(res.locals.name);
     }
 
-    res.render('main');
+    const allStatus = await OrderStatus.findAll();
+
+
+    res.render('index', { allStatus });
 
   });
 

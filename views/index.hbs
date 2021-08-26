@@ -1,10 +1,10 @@
 {{!-- {{#if user}} --}}
 <div class="helloUser">
   <div class="helloUser-hello">
-    <h1>Добро пожаловать,<br>USER{{user}}!</h1>
+    <h1>Добро пожаловать,<br>{{name}}!</h1>
   </div>
   <div class="helloUser-photo">
-    <h1>ФОТО</h1>
+    <h1><img src="{{img}}"></h1>
   </div>
 </div>
 
@@ -16,7 +16,7 @@
 <div class="cards">
   {{#each allStatus}}
 
-  <div class="card card-{{this.id}}">
+  <div class="card card-3">
     <h3 class="card__title">{{this.status}}</h3>
     <br>
     <h1 class="card__title">1000</h1>

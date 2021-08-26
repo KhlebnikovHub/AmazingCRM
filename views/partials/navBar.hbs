@@ -1,4 +1,4 @@
-{{!-- {{#if user}} --}}
+
 
 <div id="navBar">
 
@@ -7,11 +7,15 @@
       <a href="#" class="brand-logo">aCRM</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {{#if name}}
         <li class="nav-li"><a href="/">Главная</a></li>
         <li><a href="/clients">Клиенты</a></li>
         <li><a href="/orders">Заказы</a></li>
         <li><a class="not">|</a></li>
         <li><a class="exit" href="/user/logOut">Выйти</a></li>
+        {{else}} 
+        <li><a class="exit" href="/user/signIn">Войти</a></li>
+        {{/if}}
       </ul>
     </div>
     <div class="nav-content">
@@ -23,9 +27,8 @@
   </nav>
 
 </div>
-{{!-- {{else}} <h1>Вы не активированный уголь!</h1> <br> --}}
-{{!-- <a href="/user/signIn">Войти</a> --}}
-{{!-- <a href="/user/logOut">Выйти</a> --}}
 
 
-{{!-- {{/if}} --}}
+
+
+
