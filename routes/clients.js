@@ -3,6 +3,7 @@ const {Client}=require('../db/models');
 const {ClientComment}=require('../db/models');
 const {User}=require('../db/models');
 
+
 router.get('/',async(req,res)=>{
   let client;
   try {

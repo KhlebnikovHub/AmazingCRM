@@ -33,7 +33,7 @@ const adminRouter = require('./routes/admin');
 
 function checkAuth() {
   return app.use((req, res, next) => {
-    if (req.user) next()
+    if (req.session.user) next()
     else res.redirect('/login');
   });
 }
