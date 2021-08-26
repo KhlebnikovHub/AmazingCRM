@@ -6,7 +6,7 @@ const checkUser = async (req, res, next) => {
     return res.render('main');
   }
 
-  if(req.session?.passport?.user?.moderator === 'true') {
+  if(req.session?.passport?.user?.moderator === 'true' || req.session?.passport?.user?.admin === 'true') {
     return next();
   }
  console.log('REEEEEEEEEEEEEEEEEEEEEEQ', req.session?.passport);
