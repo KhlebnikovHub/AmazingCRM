@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const {User} = require('../db/models');
 const {OrderStatus} = require('../db/models');
+const {Orders} = require('../db/models');
 
 router.route('/')
 .get(async (req, res) => {
@@ -13,20 +13,20 @@ router.route('/')
 
 
 
-router.route('/')
-.get(async (req, res) => {
+// router.route('/')
+// .get(async (req, res) => {
 
-  console.log('MAIN>>>>>>>>>>>>>>>', 'REQ. USER', req.user);
-  console.log('REQ. SEEESION', req.session);
-  if(req?.session?.passport) {
-  res.locals.name = req.session.passport.user.displayName;
-  console.log('I\'m HERE! +=)+');
-  console.log(res.locals.name);   
-}
+//   console.log('MAIN>>>>>>>>>>>>>>>', 'REQ. USER', req.user);
+//   console.log('REQ. SEEESION', req.session);
+//   if(req?.session?.passport) {
+//   res.locals.name = req.session.passport.user.displayName;
+//   console.log('I\'m HERE! +=)+');
+//   console.log(res.locals.name);   
+// }
 
-res.render('main');
+// res.render('main');
 
-});
+// });
 
 
 
