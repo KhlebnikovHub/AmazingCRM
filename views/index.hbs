@@ -1,0 +1,30 @@
+{{!-- {{#if user}} --}}
+<div class="helloUser">
+  <div class="helloUser-hello">
+    <h1>Добро пожаловать,<br>USER{{user}}!</h1>
+  </div>
+  <div class="helloUser-photo">
+    <h1>ФОТО</h1>
+  </div>
+</div>
+
+<div class="heading">
+  <h1 class="heading__title">Статистика</h1>
+  <p class="heading__credits"><a class="heading__link" target="_blank" href="#">по заказам</a>
+  </p>
+</div>
+<div class="cards">
+  {{#each allStatus}}
+
+  <div class="card card-{{this.id}}">
+    <h3 class="card__title">{{this.status}}</h3>
+    <br>
+    <h1 class="card__title">1000</h1>
+    <p class="card__apply">
+      <a class="card__link" href="#">Подробнее<i class="fas fa-arrow-right"></i></a>
+    </p>
+  </div>
+  {{/each}}
+</div>
+{{!-- {{else}} <a href="/user/signIn">Войти</a> --}}
+{{!-- {{/if}} --}}

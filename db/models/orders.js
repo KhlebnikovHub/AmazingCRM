@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
       this.belongsTo(models.Client, {
+
         foreignKey:"client_id",
       })
       this.hasMany(models.OrderComment, {
