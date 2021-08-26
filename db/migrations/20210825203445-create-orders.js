@@ -44,8 +44,14 @@ module.exports = {
       brigadeAssembly: {
         type: Sequelize.INTEGER
       },
-      status: {
-        type: Sequelize.STRING
+      status_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "OrderStatuses"
+          },
+          key: "id"
+        },
       },
       createdAt: {
         allowNull: false,
