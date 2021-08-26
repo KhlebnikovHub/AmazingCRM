@@ -1,0 +1,25 @@
+{{!-- 
+{{#each client}}
+   {{this.name}}
+   {{this.phone}}
+{{/each}}
+ --}}
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each client}}
+          <tr>
+            <td><a href="/clients/{{this.id}}">{{this.name}}</a></td>
+            <td>{{this.phone}}</td>
+            <td>{{this.email}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+  
+ </table>

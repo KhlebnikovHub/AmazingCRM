@@ -1,0 +1,32 @@
+<h1>Клиент</h1>
+
+<h2>Имя: {{thisclient.name}}</h2>
+<div>Фамилия: {{thisclient.lastName}}</div>
+<div>Отчество: {{thisclient.fatherland}}</div>
+<div>Адрес: {{thisclient.address}}</div>
+<div>Телефон: {{thisclient.phone}}</div>
+<div>Почта: {{thisclient.email}}</div>
+<div>Создатель: {{thisclient.user_id}}</div>
+
+<h1>Комментарии к клиенту</h1>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th>Создатель id</th>
+              <th>Создатель</th>
+              <th>Текст</th>
+              <th>Дата</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each allComment }}
+          <tr>
+            <td>{{this.user_id}}</td>
+            <td>{{this.User.email}}</td>
+            <td>{{this.comment}}</td>
+            <td>{{this.date}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+  
+ </table>
