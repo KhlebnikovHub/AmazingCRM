@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { User } = require('../db/models');
 
 const checkUser = async (req, res, next) => {
@@ -6,7 +8,7 @@ const checkUser = async (req, res, next) => {
     return res.render('main');
   }
 
-  if(req.session?.passport?.user?.moderator === 'true') {
+  if(req.session?.passport?.user?.moderator === 'true' || req.session?.passport?.user?.admin === 'true') {
     return next();
   }
  console.log('REEEEEEEEEEEEEEEEEEEEEEQ', req.session?.passport);
@@ -25,7 +27,15 @@ const checkUser = async (req, res, next) => {
       if (ourUser.type === 'moderator') {
         req.session.passport.user.moderator = 'true';
         return next();
-      } else if (ourUser.type === 'guest') {
+      } else if (ourUser.type === 'admin' || ourUser.email === process.env.ADMIN) {
+        if(ourUser.email === process.env.ADMIN && ourUser.type !== 'admin') {
+          ourUser.type = 'admin';
+          ourUser.save();
+        }
+        req.session.passport.user.admin = 'true';
+        return next();
+      }
+      else if (ourUser.type === 'guest') {
         return res.redirect('/?login=g')
       }
     } else {
