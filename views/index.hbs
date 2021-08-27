@@ -1,12 +1,12 @@
 <div class="helloUser">
-  <div>
+  <div class="npAll">
     {{#if name}}
     <div class="namePhoto row">
       <div class="helloUser-hello s6">
       <h1>Добро пожаловать,<br>{{name}}!</h1>
     </div>
-    <div class="helloUser-photo">
-    <img src="{{img}}" class="photoUser col s6">
+    <div>
+    <img src="{{img}}" class="photoUser">
     </div>
     </div>
     {{#if auth}}
@@ -39,7 +39,7 @@
   <div class="card card-3">
     <h3 class="card__title">{{this.status}}</h3>
     <br>
-    <h1 class="card__title">1000</h1>
+    <h1 class="card__title">{{thisOrderSt}}</h1>
     <p class="card__apply">
       <a class="card__link" href="#">Подробнее<i class="fas fa-arrow-right"></i></a>
     </p>

@@ -4,9 +4,6 @@ html {
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
-body {
-    /* background: #1C1D22; */
-}
 /* ================ Блоки на главной странице =================== */
 
 .adminImg {
@@ -21,20 +18,33 @@ body {
   justify-content: space-around;
 }
 
-.helloUser-photo {
-  display: flex;
-  align-items:baseline;
-  width: 500px;
-  margin-left: -100px;
+.helloUser img {
+  margin-left: 150px;
+  width: 250px;
+  height: 250px;
+  -webkit-border-radius: 50em;
+  -moz-border-radius: 50em;
+  border-radius: 50em;
+  -webkit-box-shadow: 0px 0px 54px -1px rgba(105, 0, 255, 0.78);
+  -moz-box-shadow: 0px 0px 54px -1px rgba(105, 0, 255, 0.78);
+  box-shadow: 0px 0px 54px -1px rgba(105, 0, 255, 0.78);
+
+
+}
+
+.npAll {
+  margin-top: 2%;
+  min-width:70vw;
+  -webkit-box-shadow: 0px 0px 10px 8px rgba(34, 60, 80, 0.2) inset;
+  -moz-box-shadow: 0px 0px 10px 8px rgba(34, 60, 80, 0.2) inset;
+  box-shadow: 0px 0px 10px 8px rgba(34, 60, 80, 0.2) inset;
 }
 
 .namePhoto{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 5%;
-  border: 1px solid #790800;
   padding: 5%;
-  background: #dbdbdb;
 }
 .main-container {
   padding: 30px;
@@ -83,6 +93,31 @@ body {
   border-radius: 10px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
   transition: all 0.2s;
+  opacity:0; /*Элемент полностью прозрачный (невидимый)*/
+  transition: 2s; /*Скорость перехода состояния элемента*/
+  animation: show 2s 1; /* Указываем название анимации, её время и количество повторов*/
+  animation-fill-mode: forwards; /* Чтобы элемент оставался в конечном состоянии анимации */
+  animation-delay: 1s; /* Задержка перед началом */
+
+}
+@-webkit-keyframes show {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-o-keyframes show {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes show {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes show {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 .card:hover {
@@ -156,7 +191,7 @@ body {
 
 /* ============= Навигация ============= */
 .nav-extended {
-  background: #ff0062
+  background: #ff004c
 }
 
 .nav-extended a {
@@ -215,9 +250,137 @@ body {
 .alert.info {background-color: #2196F3;} 
 .alert.warning {background-color: #ff9800;} */
 
+/* ============Table============== */
+/* .tableTr {
+  background: rgb(211, 211, 211);
+  font-size: large;
+  font-weight: bolder;
+}
 
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 5px;
+  background: #ECE9E0;
+  color: #656665;
+  border: 16px solid #ECE9E0;
+  border-radius: 20px;
+  }
+  th {
+  font-size: 18px;
+  padding: 10px;
+  }
+  td {
+  background: #F5D7BF;
+  padding: 10px;
+  }
 
-/* ==========Фото========== */
-.helloUser-photo img{
-width: 300px;
+.th {
+  border-right: 1px solid rgb(88, 0, 0);
+  font-size: large;
+  font-weight: bold;
+} */
+
+.simple-little-table {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:18px;
+	text-shadow: 1px 1px 0px #fff;
+	background:#eaebec;
+	border:#ccc 1px solid;
+	border-collapse:separate;
+  max-width: 100vw;
+  margin-top: 20px;
+ 
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+ 
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+ 
+.simple-little-table th {
+	font-weight:bold;
+	padding:21px 25px 22px 25px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+ 
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+.simple-little-table th:first-child{
+	text-align: left;
+	padding-left:20px;
+}
+.simple-little-table tr:first-child th:first-child{
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+.simple-little-table tr:first-child th:last-child{
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+.simple-little-table tr{
+	text-align: center;
+	padding-left:20px;
+}
+.simple-little-table tr td:first-child{
+	text-align: left;
+	padding-left:20px;
+	border-left: 0;
+}
+.simple-little-table tr td {
+	padding:18px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+ 
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+.simple-little-table tr:nth-child(even) td{
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+.simple-little-table tr:last-child td{
+	border-bottom:0;
+}
+.simple-little-table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+.simple-little-table tr:last-child td:last-child{
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+.simple-little-table tr:hover td{
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);
+}
+ 
+.simple-little-table a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
+}
+.simple-little-table a:visited {
+	color: #999999;
+	font-weight:bold;
+	text-decoration:none;
+}
+.simple-little-table a:active,
+.simple-little-table a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
 }

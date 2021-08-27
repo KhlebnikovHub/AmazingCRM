@@ -1,25 +1,38 @@
-{{!-- 
-{{#each client}}
-   {{this.name}}
-   {{this.phone}}
-{{/each}}
- --}}
-<table class="responsive-table">
-        <thead>
+<table class="simple-little-table">
+        <thead class="tableTr">
           <tr>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
+              <th class="th">Name</th>
+              <th class="th">Phone</th>
+              <th class="th">Email</th>
           </tr>
         </thead>
         <tbody>
         {{#each client}}
           <tr>
-            <td><a href="/clients/{{this.id}}">{{this.name}}</a></td>
-            <td>{{this.phone}}</td>
-            <td>{{this.email}}</td>
+            <td class="td"><a href="/clients/{{this.id}}">{{this.name}}</a></td>
+            <td class="td">{{this.phone}}</td>
+            <td class="td">{{this.email}}</td>
           </tr>
           {{/each}}
         </tbody>
   
  </table>
+
+{{!-- 
+        <thead class="tableTr">
+          <li>
+              <ul class="ul">Name</ul>
+              <ul class="ul">Phone</ul>
+              <ul class="ul">Email</ul>
+          </li>
+        </thead>
+        <tbody>
+        {{#each client}}
+          <li>
+            <ul class="th"><a href="/clients/{{this.id}}">{{this.name}}</a></ul>
+            <ul class="th">{{this.phone}}</ul>
+            <ul class="th">{{this.email}}</ul>
+          </li>
+          {{/each}}
+        </tbody>
+   --}}
