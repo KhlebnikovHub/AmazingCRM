@@ -1,22 +1,32 @@
-{{!-- {{#if user}} --}}
 <div class="helloUser">
-  <div class="helloUser-hello">
+  <div>
     {{#if name}}
-    <h1>Добро пожаловать,<br>{{name}}!</h1>
-    <h5>{{#if auth}}
-{{else}} <div>Вы зарегистрированы в системе, ожидайте подтверждения регистрации администратором</div>
-{{/if}}</h5>
+    <div class="namePhoto row">
+      <div class="helloUser-hello s6">
+      <h1>Добро пожаловать,<br>{{name}}!</h1>
+    </div>
+    <div class="helloUser-photo">
+    <img src="{{img}}" class="photoUser col s6">
+    </div>
+    </div>
+    {{#if auth}}
+    {{else}}
+    <div class="alert col s12">
+      <h5><strong>Внимание!</strong> Вы зарегистрированы в системе, ожидайте подтверждения регистрации
+        администратором.</h5>
+    </div>
+    {{/if}}
+  </div>
 
-{{else}}
-<h5>Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в Google</a> </h5>
-{{/if}}
+  {{else}}
+  <div class="alert col s12">
+    <h5><strong>Внимание!</strong> Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в
+        Google</a> </h5>
+  </div>
+  {{/if}}
+</div>
 
 {{#if name}}
-  </div>
-  <div class="helloUser-photo">
-    <h1><img src="{{img}}"></h1>
-  </div>
-</div>
 {{#if auth}}
 <div class="heading">
   <h1 class="heading__title">Статистика</h1>
@@ -38,5 +48,3 @@
 </div>
 {{/if}}
 {{/if }}
-{{!-- {{else}} <a href="/user/signIn">Войти</a> --}}
-{{!-- {{/if}} --}}
