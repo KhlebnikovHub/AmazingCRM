@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.ClientComment, {
         foreignKey: 'id_client',
       });
-
       this.hasMany(models.Orders, {
         foreignKey: 'client_id',
       });

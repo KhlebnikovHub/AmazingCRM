@@ -4,9 +4,6 @@ const { Orders } = require('../db/models');
 const { initUser } = require('../middlewares/initUser');
 
 
-
-
-
 router.route('/')
   .get(initUser, async (req, res) => {
     
@@ -20,12 +17,9 @@ router.route('/')
       console.log('I\'m HERE! +=)+');
       console.log(res.locals.name);
     }
-
     const allStatus = await OrderStatus.findAll();
-
-
     res.render('index', { allStatus });
-
   });
+
 
 module.exports = router;

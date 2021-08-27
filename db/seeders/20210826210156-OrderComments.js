@@ -2,34 +2,35 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('ClientComments', [
-      {
-        user_id:1,
-        id_client:1,
-        comment:"lalsdlrkmgkmsrtm",
-        date: new Date(),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
+    await queryInterface.bulkInsert('OrderComments', [
       {
         user_id:2,
-        id_client:2,
-        comment:"i love eat",
+        id_order: 1,
+        comment: "DataTypesTEXT",
         date: new Date(),
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         user_id:1,
-        id_client:3,
-        comment:"my best friend",
+        id_order: 3,
+        comment: "TEXT",
         date: new Date(),
         createdAt: new Date(),
         updatedAt: new Date()
-      },{
+      },
+      {
         user_id:2,
-        id_client:3,
-        comment:"moskva ne rossia",
+        id_order: 2,
+        comment: "Data",
+        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        user_id:2,
+        id_order: 4,
+        comment: "Datsdfghj;lkjhgfdsxcvgbhjkl;kjhgaTypesTEXT",
         date: new Date(),
         createdAt: new Date(),
         updatedAt: new Date()
