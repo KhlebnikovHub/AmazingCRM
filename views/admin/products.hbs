@@ -6,9 +6,16 @@
               <th>Описание</th>
               <th>Остаток</th>
               <th>Цена</th>
+               <th id="addcontainer"><button class="waves-effect waves-light btn-large" id = "addbutton" width="50px" style="margin-left: -100px;">Добавить</button></th>
           </tr>
         </thead>
         <tbody>
+          <div data-did="">
+            <tr data-id="">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         {{#each products}}
           <div data-did="{{this.id}}">
             <tr data-id="{{this.id}}">
@@ -17,6 +24,7 @@
             <td>{{this.stock}}</td>
             <td>{{this.price}}</td>
             <td><a id="adminEdit">Редактировать</a></td>
+            <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
           {{/each}}

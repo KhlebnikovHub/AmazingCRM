@@ -1,0 +1,27 @@
+
+<table class="responsive-table" id = "userTable">
+        <thead>
+          <tr>
+              <th>Категория</th>
+              
+              <th id="addcontainer"><button class="waves-effect waves-light btn-large" id = "addbutton" width="50px">Добавить</button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <div data-did="">
+            <tr data-id="">
+            <td></td>
+        {{#each categories}}
+          <div data-did="{{this.id}}">
+            <tr data-id="{{this.id}}">
+            <td>{{this.categories}}</td>
+      
+            <td style="width:10%"><a id="adminEdit">Редактировать</a></td>
+            <td><a id="adminEdit">Удалить</a></td>
+          </tr>
+          </div>
+          {{/each}}
+        </tbody>
+  
+ </table>
+<script defer src = "/js/admin/categories.js"></script>

@@ -1,6 +1,8 @@
 const router = require('express').Router();
+// const sequelize = require('../db/connection')
+const { QueryTypes } = require('sequelize')
 
-const { User, Products } = require('../db/models');
+const { User, Products, Categories } = require('../db/models');
 
 
 
@@ -20,8 +22,8 @@ router.route('/users')
   .post(async (req, res) => {
     console.log(req.body);
     try {
-    const curUser = await User.findByPk(req.body.curId);
-    res.json(curUser);
+      const curUser = await User.findByPk(req.body.curId);
+      res.json(curUser);
     } catch (err) {
       console.log(err);
       res.sendStatus(500).end();
@@ -29,18 +31,28 @@ router.route('/users')
   })
   .patch(async (req, res) => {
     try {
-    const { email, superselect: type, phoneNumb, curId } = req.body;
-    const name = req.body.username.split(' ');
-    const firstName = name[0];
-    const lastName = name[1];
-    let editUser = await User.update({email, type, phoneNumb, firstName, lastName }, {where: { id: curId}});
-    let last = await User.findByPk(curId);
-    return res.json(last);
+      const { email, superselect: type, phoneNumb, curId } = req.body;
+      const name = req.body.username.split(' ');
+      const firstName = name[0];
+      const lastName = name[1];
+      let editUser = await User.update({ email, type, phoneNumb, firstName, lastName }, { where: { id: curId } });
+      let last = await User.findByPk(curId);
+      return res.json(last);
     } catch (error) {
       console.log(error);
       res.sendStatus(500).end();
     }
-  });
+  })
+  .delete(async (req, res) => {
+    try {
+      let deleted = await User.destroy({ where: { id: req.body.curId } });
+      return res.json(deleted);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500).end();
+    }
+
+  })
 
 
 router.route('/products')
@@ -50,29 +62,67 @@ router.route('/products')
     res.render('admin/products', { products })
   })
 
+router.route('/categories')
+  .get(async (req, res) => {
+    let categories = await Categories.findAll();
 
-router.get('/:id', async (req, res) => {
-
-  let thisclient = await Client.findAll({
-    where: { id: req.params.id },
-    include: [{
-      model: User,
-      as: 'User'
-    }],
+    res.render('admin/categories', { categories })
   })
-  let allComment = await ClientComment.findAll({
-    include: [{
-      model: User,
-      as: 'User'
-    }],
-    where: { id_client: req.params.id }
+  .post(async (req, res) => {
+    console.log(req.body);
+    try {
+      const curCategory = await Categories.findByPk(req.body.curId);
+      res.json(curCategory);
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(500).end();
+    }
   })
+  .patch(async (req, res) => {
 
-  res.locals.thisclient = thisclient;
-  res.locals.allComment = allComment;
-  //console.log("lalalala", allComment)
-  res.render('thisClient')
+    try {
+      const { category: categories, curId } = req.body;
+      let editCategory = await Categories.update({ categories }, { where: { id: curId } });
+      let last = await Categories.findByPk(curId);
+      return res.json(last);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500).end();
+    }
+
+
+  })
+  .delete(async (req, res) => {
+    try {
+      let deleted = await Categories.destroy({ where: { id: req.body.curId } });
+      return res.json(deleted);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500).end();
+    }
+
+  });
+
+
+router.post('/categories/new', async (req, res) => {
+  try {
+    const { category } = req.body;
+    const newCategory = await Categories.findOrCreate({ where: { categories: category }, defaults: { categories: category } });
+    return res.json(newCategory);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500).end();
+  }
+
 })
+
+router.post('/categories/all', async (req, res) => {
+
+  console.log(1421235346346346346346);
+
+});
+
+
 
 
 

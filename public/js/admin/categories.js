@@ -1,9 +1,7 @@
-
 const $table = document.querySelector("#userTable");
 const $did = document.querySelector("[data-did]");  
 let curId;
-
-
+$addButton = document.querySelector("#addbutton"); 
 
 $table.addEventListener('click', async (event) => {
   console.log(event.target); 
@@ -12,9 +10,10 @@ $table.addEventListener('click', async (event) => {
     const $closTr = event.target.closest("[data-id]");
     curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
+    console.log($closTr, 'TRRRRRRRRRR');
     $closTr.innerHTML = ``;
     
-    const response = await fetch('/admin/users', {
+    const response = await fetch('/admin/categories', {
       method: 'POST',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
@@ -29,18 +28,8 @@ $table.addEventListener('click', async (event) => {
       
       <form name="editform" >
       <tr id = "editform">
-      <td style="width:25%;"><input type="text" value="${dataBack.lastName} ${dataBack.firstName}" name="username" id = "username"></td>
-      <td style="width:12%;"><input type="text" value="${dataBack.phoneNumb}" name="phoneNumb" id = "phoneNumb"></td>
-      <td style="width:20%;"><input type="text" value="${dataBack.email}" style="width:90%;" name = "email" id = "email"></td>
-      <td style="width:20%;">
-
-      <select class="browser-default" name = "user_type" id = "superselect">
-      <option value="" disabled selected>Выберите права пользователя</option>
-      <option value="guest">Гость</option>
-      <option value="moderator">Менеджер</option>
-      <option value="admin">Админ</option>
-      </select>
-      
+      <td style="width:40%;"><input type="text" value="${dataBack.categories}" style="width:90%;" name = "category" id = "category"></td>
+      <td style="width:10%;">
       </td>
       <td><button class="waves-effect waves-light btn-large" id = "newEdit">Изменить</button></td>
     </tr>
@@ -60,14 +49,12 @@ $table.addEventListener('click', async (event) => {
     newEdit.addEventListener('click', async (event) => {
       event.preventDefault();
       const $editForm = document.querySelector("#editform");  
-      const username = document.querySelector("#username").value; 
-      const phoneNumb = document.querySelector("#phoneNumb").value; 
-      const email = document.querySelector("#email").value; 
-      const superselect = document.querySelector("#superselect").value; 
-      const editResponse = await fetch('/admin/users', {
+      const category = document.querySelector("#category").value; 
+      
+      const editResponse = await fetch('/admin/categories', {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json;charset=utf-8' },
-        body: JSON.stringify({ username, phoneNumb, email, superselect, curId }),
+        body: JSON.stringify({ category, curId }),
       });
 
       if(editResponse.ok) {
@@ -77,11 +64,8 @@ $table.addEventListener('click', async (event) => {
         
           <div data-did="${editted.id}">
             <tr data-id="${editted.id}">
-            <td>${editted.lastName} ${editted.firstName}</td>
-            <td>${editted.phoneNumb}</td>
-            <td>${editted.email}</td>
-            <td>${editted.type}</td>
-            <td><a id="adminEdit">Редактировать</a></td>
+            <td>${editted.categories}</td>
+            <td style="width:10%"><a id="adminEdit">Редактировать</a></td>
             <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
@@ -99,12 +83,13 @@ $table.addEventListener('click', async (event) => {
 
   }
 
+
   if(event.target.tagName === "A" && event.target.innerText === "Удалить") {
 
     const $closTr = event.target.closest("[data-id]");
     curId = $closTr.dataset.id;
     
-    const response = await fetch('/admin/users', {
+    const response = await fetch('/admin/categories', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
@@ -118,4 +103,72 @@ $table.addEventListener('click', async (event) => {
     
   }
 
+ 
+  if(event.target.tagName === "BUTTON" && event.target.innerText === "ДОБАВИТЬ") {
+
+    const $closTr = document.querySelector("[data-id]");
+    curId = $closTr.dataset.id;
+     
+    $addContainer = document.querySelector("#addcontainer")
+    $addButton.disabled = "true";
+    
+    $closTr.insertAdjacentHTML('beforebegin', `
+    <form name="addform">
+    <tr  id="addform">
+    <td style="width:40%;"><input type="text" style="width:90%;" name = "category" id = "category"></td>
+    </td>
+    <td><button class="waves-effect waves-light btn-large" id = "newAdd">Отправить</button></td>
+  </tr>
+    </form>
+    `);
+
+    const newAdd = document.querySelector("#newAdd");
+
+    newAdd.addEventListener('click', async (event) => {
+      const category = document.querySelector("#category").value; 
+      
+      const response = await fetch('/admin/categories/new', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json;charset=utf-8' },
+        body: JSON.stringify({ category }),
+      });
+      let dataBack;
+      if(response.ok) {
+        dataBack = await response.json();
+        console.log(dataBack);
+      }
+       
+      $closTr.insertAdjacentHTML('beforebegin', `
+      <div data-did="${dataBack[0].id}">
+            <tr data-id="${dataBack[0].id}">
+            <td>${dataBack[0].categories}</td>
+      
+            <td style="width:10%"><a id="adminEdit">Редактировать</a></td>
+            <td><a id="adminEdit">Удалить</a></td>
+          </tr>
+          </div>
+      `);
+
+      $addForm = document.querySelector("#addform");
+      $addForm.remove();
+      $addButton.disabled = "";   
+
+    })
+
+ 
+
+
+
+  
+
+    
+   
+    
+  }
+  
+
+
+
 });
+
+
