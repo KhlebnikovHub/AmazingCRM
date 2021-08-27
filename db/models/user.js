@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Orders,{
         foreignKey:"user_id",
       })
-
     }
   }
   User.init(

@@ -5,34 +5,34 @@ module.exports = {
     await queryInterface.bulkInsert('Clients', [
     {
       name: "Andry",
-      lastName: "qwerty",
-      fatherland: "hjh",
-      address: "tyb",
+      lastName: "qwerdfghty",
+      fatherland: "hjfghh",
+      address: "tyfghb",
       phone: "1234567890678",
-      email: "vhg@mail.ru",
+      email: "vh7g@mail.ru",
       user_id: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       name: "Ivan",
-      lastName: "qwerty",
+      lastName: "qrty",
       fatherland: "hjh",
       address: "tyb",
-      phone: "1234567890678",
-      email: "vhg@mail.ru",
-      user_id: 1,
+      phone: "167890678",
+      email: "vh8g@mail.ru",
+      user_id: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       name: "Lidia",
       lastName: "qwerty",
-      fatherland: "hjh",
-      address: "tyb",
-      phone: "1234567890678",
-      email: "vhg@mail.ru",
-      user_id: 1,
+      fatherland: "hjghjklh",
+      address: "tyvbnmb",
+      phone: "1234567898",
+      email: "vh76g@mail.ru",
+      user_id: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }

@@ -18,9 +18,14 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  let thisclient = await Client.findOne({ where: { id: req.params.id } })
-  //console.log(thisclient)
 
+  let thisclient = await Client.findAll({
+     where: { id: req.params.id } ,
+     include: [{
+      model: User,
+      as: 'User'
+    }],
+  })
   let allComment = await ClientComment.findAll({
     include: [{
       model: User,
@@ -31,7 +36,7 @@ router.get('/:id', async (req, res) => {
 
   res.locals.thisclient = thisclient;
   res.locals.allComment = allComment;
-  console.log("lalalala", allComment)
+  //console.log("lalalala", allComment)
   res.render('thisClient')
 })
 
