@@ -2,7 +2,7 @@ const { User } = require('../db/models');
 
 const initUser = async (req, res, next) => {
  
-  if(req.session?.passport?.user?.moderator === 'true') {
+  if(req.session?.passport?.user?.moderator === 'true' || req.session?.passport?.user?.admin === 'true') {
     return next();
   }
 
@@ -17,7 +17,10 @@ const initUser = async (req, res, next) => {
       if (ourUser.type === 'moderator') {
         req.session.passport.user.moderator = 'true';
         return next();
-      } 
+      } else if (ourUser.type === 'admin') {
+        req.session.passport.user.admin = 'true';
+        return next();
+      }
     } else {
       await User.create({
         type: 'guest', email, firstName, lastName, phoneNumb: 'Отсутствует',
