@@ -13,15 +13,25 @@ router.get('/', async (req, res) => {
       message: 'Something went wrong', error: {},
     });
   }
+  console.log('-------', req.session.user_id)
+  res.render('client', { client,user:req.session.user_id})
+})
 
-  res.render('client', { client })
+router.post('/', async (req, res) => {
+  try {
+    const newClient = await Client.create(req.body);
+    return res.json(newClient);
+  } catch (err) {
+    console.log(err);
+  }
+
 })
 
 router.get('/:id', async (req, res) => {
 
   let thisclient = await Client.findAll({
-     where: { id: req.params.id } ,
-     include: [{
+    where: { id: req.params.id },
+    include: [{
       model: User,
       as: 'User'
     }],
@@ -36,7 +46,6 @@ router.get('/:id', async (req, res) => {
 
   res.locals.thisclient = thisclient;
   res.locals.allComment = allComment;
-  //console.log("lalalala", allComment)
   res.render('thisClient')
 })
 

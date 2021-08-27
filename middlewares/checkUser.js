@@ -21,6 +21,7 @@ const checkUser = async (req, res, next) => {
     console.log('HEEEEEEEEEEEEEEEEERE', ourUser);
 
     if (ourUser) {
+      req.session.user_id = ourUser.id;
       if (ourUser.type === 'moderator') {
         req.session.passport.user.moderator = 'true';
         return next();

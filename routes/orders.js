@@ -3,7 +3,6 @@ const { User } = require('../db/models');
 const { Orders } = require('../db/models');
 const { Client } = require('../db/models');
 const { OrderStatus } = require('../db/models');
-
 const { OrderComment } = require('../db/models');
 
 router.route('/')
@@ -30,9 +29,35 @@ router.route('/')
         message: 'Something went wrong', error: {},
       });
     }
-    console.log(order)
+    //console.log(order)
     res.render('order', { order })
 
+  })
+
+  .post( async (req, res) => {
+    try {
+      const newClient = await Orders.create(req.body);
+      const user =await Orders.findOne({
+        include: [{
+          model: User,
+          as: 'User'
+        },
+        {
+          model: Client,
+          as: 'Client'
+        },
+        {
+          model: OrderStatus,
+          as: 'OrderStatus'
+        }],
+        where:{id:newClient.id}
+      })
+      console.log(user);
+      return res.json(user);
+    } catch (err) {
+      console.log(err);
+    }
+  
   })
 
 router.route('/:id')
@@ -62,23 +87,6 @@ router.route('/:id')
       }
     ],
       where: { id_order: req.params.id }
-/*       include: [{
-        model: User,
-        as: 'User'
-      },
-      {
-        model: Client,
-        as: 'Client'
-      },
-      {
-        model: OrderStatus,
-        as: 'OrderStatus'
-      },
-      {
-        model: OrderStatus,
-        as: 'OrderStatus'
-      }
-    ], */
     })
   
     res.locals.thisOrder = thisOrder;

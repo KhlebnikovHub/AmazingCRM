@@ -1,23 +1,72 @@
+<script defer src="/js/order.js"></script>
+
+<div class="addOrder">
+  <form name="addOrder" action="/orders/new" method="POST">
+    <div class="input-field col s4">
+      <input placeholder="Title" id="title" type="text" class="validate" name="user_id">
+      <label for="title">user_id</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="client_id">
+      <label for="Text">client_id</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="deliveryPrice">
+      <label for="Text">deliveryPrice</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="assemblyPrice">
+      <label for="Text">assemblyPrice</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="dataDelivery">
+      <label for="Text">dataDelivery</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="dataAssembly">
+      <label for="Text">dataAssembly</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="brigadeDelivery">
+      <label for="Text">brigadeDelivery</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="brigadeAssembly">
+      <label for="Text">brigadeAssembly</label>
+    </div>
+    <div class="input-field col s6">
+      <input placeholder="Text" id="Text" type="text" class="validate" name="status_id">
+      <label for="Text">status_id</label>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Submit
+    </button>
+  </form>
+</div>
+
 <table class="responsive-table">
-        <thead>
-          <tr>
-              <th>Number</th>
-              <th>User</th>
-              <th>client</th>
-              <th>status</th>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>User</th>
+      <th>client</th>
+      <th>status</th>
 
-          </tr>
-        </thead>
-        <tbody>
-        {{#each order}}
-          <tr>
-            <td><a href="/orders/{{this.id}}">{{this.id}}</a></td>
-            <td> {{this.User.firstName}} {{this.User.lastName}} {{this.User.email}}</td>
-            <td> {{this.Client.name}} </td>
-            <td>{{this.OrderStatus.status}}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <div data-postWrapper>
+      {{#each order}}
+      <tr>
+        <td><a href="/orders/{{this.id}}">{{this.id}}</a></td>
+        <td> {{this.User.firstName}} {{this.User.lastName}} {{this.User.email}}</td>
+        <td> {{this.Client.name}} </td>
+        <td>{{this.OrderStatus.status}}</td>
 
-          </tr>
-          {{/each}}
-        </tbody>
-  
- </table>
+      </tr>
+      {{/each}}
+    </div>
+
+  </tbody>
+
+</table>
