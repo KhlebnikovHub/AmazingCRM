@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { User } = require('../db/models');
+const { User, Products } = require('../db/models');
 
 
 
@@ -28,7 +28,26 @@ router.route('/users')
     }
   })
   .patch(async (req, res) => {
-    console.log(req.body);
+    try {
+    const { email, superselect: type, phoneNumb, curId } = req.body;
+    const name = req.body.username.split(' ');
+    const firstName = name[0];
+    const lastName = name[1];
+    let editUser = await User.update({email, type, phoneNumb, firstName, lastName }, {where: { id: curId}});
+    let last = await User.findByPk(curId);
+    return res.json(last);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500).end();
+    }
+  });
+
+
+router.route('/products')
+  .get(async (req, res) => {
+    let products = await Products.findAll();
+
+    res.render('admin/products', { products })
   })
 
 

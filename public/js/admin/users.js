@@ -1,6 +1,7 @@
 
 const $table = document.querySelector("#userTable");
 const $did = document.querySelector("[data-did]");  
+let curId;
 
 
 
@@ -9,10 +10,10 @@ $table.addEventListener('click', async (event) => {
   if(event.target.tagName === "A" && event.target.innerText === "Редактировать") {
     
     const $closTr = event.target.closest("[data-id]");
-    const curId = $closTr.dataset.id;
+    curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
-
-    $closTr.innerHTML = "";
+    console.log($closTr, 'TRRRRRRRRRR');
+    $closTr.innerHTML = ``;
     
     const response = await fetch('/admin/users', {
       method: 'POST',
@@ -25,11 +26,12 @@ $table.addEventListener('click', async (event) => {
       console.log(dataBack);
     }
 
-    $closTr.insertAdjacentHTML('afterbegin', `
-      <form name="editform" id="editform">
-      <tr>
+    $closTr.innerHTML = `
+      
+      <form name="editform" >
+      <tr id = "editform">
       <td style="width:25%;"><input type="text" value="${dataBack.lastName} ${dataBack.firstName}" name="username" id = "username"></td>
-      <td style="width:12%;"><input type="text" value="${dataBack.phoneNumb}" name="phoneNumb" id = "phonoNumb"></td>
+      <td style="width:12%;"><input type="text" value="${dataBack.phoneNumb}" name="phoneNumb" id = "phoneNumb"></td>
       <td style="width:20%;"><input type="text" value="${dataBack.email}" style="width:90%;" name = "email" id = "email"></td>
       <td style="width:20%;">
 
@@ -44,7 +46,8 @@ $table.addEventListener('click', async (event) => {
       <td><button class="waves-effect waves-light btn-large" id = "newEdit">Изменить</button></td>
     </tr>
       </form>
-    `);
+     
+    `;
 
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');
@@ -57,16 +60,37 @@ $table.addEventListener('click', async (event) => {
 
     newEdit.addEventListener('click', async (event) => {
       event.preventDefault();
+      const $editForm = document.querySelector("#editform");  
       const username = document.querySelector("#username").value; 
-      
+      const phoneNumb = document.querySelector("#phoneNumb").value; 
+      const email = document.querySelector("#email").value; 
+      const superselect = document.querySelector("#superselect").value; 
       const editResponse = await fetch('/admin/users', {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json;charset=utf-8' },
-        body: JSON.stringify({ dataEdit }),
+        body: JSON.stringify({ username, phoneNumb, email, superselect, curId }),
       });
 
       if(editResponse.ok) {
-
+        const editted = await editResponse.json();
+        $table.insertAdjacentHTML('beforeend', `
+        <tbody>
+        
+          <div data-did="${editted.id}">
+            <tr data-id="${editted.id}">
+            <td>${editted.lastName} ${editted.firstName}</td>
+            <td>${editted.phoneNumb}</td>
+            <td>${editted.email}</td>
+            <td>${editted.type}</td>
+            <td><a id="adminEdit">Редактировать</a></td>
+          </tr>
+          </div>
+          
+        </tbody>
+        `);
+        let trtr = document.querySelector(`tr[data-id="${curId}"]`);
+        console.log(trtr);
+        trtr.remove();
       }
 
     })
