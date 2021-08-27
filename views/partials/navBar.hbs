@@ -7,7 +7,7 @@
       <a href="#" class="brand-logo">aCRM</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {{#if name}}
-        {{#if admin}}<a href="/admin"><li><img src="/images/admin1.png" class="adminImg" height="70px"></li></a>{{/if}}
+        {{#if admin}}<li><img src="/images/admin1.png" class="adminImg" height="70px"></li>{{/if}}
         <li class="nav-li"><a href="/">Главная</a></li>
         <li><a href="/clients">Клиенты</a></li>
         <li><a href="/orders">Заказы</a></li>
@@ -21,10 +21,15 @@
     </div>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#">Мои</a></li>
-        <li class="tab"><a href="#">Все</a></li>
+        {{#if admin}}
+        <li class="tab"><a href="/admin/users">Пользователи</a></li>
+        <li class="tab"><a href="/admin/products">Продукты</a></li>
+        <li class="tab"><a href="/admin/categories">Категории</a></li>
+        <li class="tab"><a href="/admin/comands">Бригады</a></li>
+        {{/if}}
       </ul>
     </div>
+    
   </nav>
 
 </div>

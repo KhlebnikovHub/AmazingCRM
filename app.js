@@ -71,7 +71,7 @@ passport.use(
 )
 
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 
