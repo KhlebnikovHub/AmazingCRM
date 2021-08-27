@@ -34,15 +34,12 @@
   </p>
 </div>
 <div class="cards">
-  {{#each allStatus}}
+  {{#each countOrders}}
 
   <div class="card card-3">
     <h3 class="card__title">{{this.status}}</h3>
     <br>
-    <h1 class="card__title">{{thisOrderSt}}</h1>
-    <p class="card__apply">
-      <a class="card__link" href="#">Подробнее<i class="fas fa-arrow-right"></i></a>
-    </p>
+    <h1 class="card__title">{{this.count}}</h1>
   </div>
   {{/each}}
 </div>

@@ -1,32 +1,53 @@
-<h1>Klient</h1>
 {{#each thisclient}}
-<h2>Имя: {{this.name}}</h2>
-<div>Фамилия: {{this.lastName}}</div>
-<div>Отчество: {{this.fatherland}}</div>
-<div>Адрес: {{this.address}}</div>
-<div>Телефон: {{this.phone}}</div>
-<div>Почта: {{this.email}}</div>
-<div>Создал: {{this.User.firstName}} {{this.User.lastName}} Почта:{{this.User.email}}</div>
+<h2>Карточка клиента:</h2>
+<table class="simple-little-table">
+  <thead class="tableTr">
+    <tr>
+      <td class="th">Имя:</td>
+      <td class="th">{{this.name}} {{this.lastName}}</td>
+    </tr>
+    <tr>
+      <td class="th">Компания:</td>
+      <td class="th">{{this.fatherland}}</td>
+    </tr>
+    <tr>
+      <td class="th">Адрес:</td>
+      <td class="th">{{this.address}}</td>
+    </tr>
+    <tr>
+      <td class="th">Телефон:</td>
+      <td class="th">{{this.phone}}</td>
+    </tr>
+    <tr>
+      <td class="th">Email:</td>
+      <td class="th">{{this.email}}</td>
+    </tr>
+    <tr>
+      <td class="th">Создал:</td>
+      <td class="th">{{this.User.firstName}} {{this.User.lastName}}<br>{{this.User.email}}</td>
+    </tr>
+  </thead>
+</table>
 {{/each}}
-<h1>Комментарии к заказу</h1>
-<table class="responsive-table">
-        <thead>
-          <tr>
-              <th>Инициалы комментирующего</th>
-              <th>Почта комментирующего</th>
-              <th>Текст</th>
-              <th>Дата</th>
-          </tr>
-        </thead>
-        <tbody>
-        {{#each allComment }}
-          <tr>
-            <td>{{this.User.firstName}} {{this.User.lastName}}</td>
-            <td>{{this.User.email}}</td>
-            <td>{{this.comment}}</td>
-            <td>{{this.date}}</td>
-          </tr>
-          {{/each}}
-        </tbody>
-  
- </table>
+<h2 style="text-align:center">Комментарии к заказу</h2>
+<table class="simple-little-table">
+  <thead>
+    <tr>
+      <th>Текст</th>
+      <th>Инициалы комментирующего</th>
+      <th>Почта комментирующего</th>
+      <th>Дата</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each allComment }}
+    <tr>
+      <td>{{this.comment}}</td>
+      <td>{{this.User.firstName}} {{this.User.lastName}}</td>
+      <td>{{this.User.email}}</td>
+      <td>{{this.date}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+
+</table>
