@@ -11,12 +11,13 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         
         {{#if name}}
-        {{#if admin}}<li><img src="/images/admin1.png" height="70px"></li>{{/if}}
+        {{#if admin}}<a href="/admin"><li><img src="/images/admin1.png" class="adminImg" height="70px"></li></a>{{/if}}
         <li class="nav-li"><a href="/">Главная</a></li>
         <li><a href="/clients">Клиенты</a></li>
         <li><a href="/orders">Заказы</a></li>
         <li><a class="not">|</a></li>
         <li><a class="exit" href="/user/logOut">Выйти</a></li>
+        
         {{else}} 
         <li><a class="exit" href="/user/signIn">Войти</a></li>
         {{/if}}
