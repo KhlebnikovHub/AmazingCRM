@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
       message: 'Something went wrong', error: {},
     });
   }
-  console.log('-------', req.session.user_id)
+ 
   res.render('client', { client,user:req.session.user_id})
 })
 
@@ -43,10 +43,32 @@ router.get('/:id', async (req, res) => {
     }],
     where: { id_client: req.params.id }
   })
-
+  res.locals.id=req.params.id;
   res.locals.thisclient = thisclient;
   res.locals.allComment = allComment;
-  res.render('thisClient')
+  res.render('thisClient', { user:req.session.user_id})
+})
+
+
+router.post('/:id/comments', async (req, res) => {
+  try {
+    const newComment = await ClientComment.create({...req.body, id_client:req.params.id});
+    const user =await ClientComment.findAll({
+        include: [{
+          model: User,
+          as: 'User'
+        },
+        {
+          model: Client,
+          as: 'Client'
+        }],
+        where:{id:newComment.id}
+    })
+      return res.json(user)
+  } catch (err) {
+    console.log(err);
+  }
+
 })
 
 

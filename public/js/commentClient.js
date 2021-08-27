@@ -1,33 +1,30 @@
-const Client = document.querySelector('.addClient');
-console.log(Client)
-const table = document.querySelector('.responsive-table');
-console.log(table)
-const $newCli = document.querySelector('[data-postWrapper]')
+const addComment = document.forms.addComment
 
 
-Client.addEventListener('submit', async (e) => {
+addComment.addEventListener('submit', async (e) => {
   e.preventDefault()
-  console.log("submit")
   const dataFromForm = Object.fromEntries(new FormData(e.target));
   console.log(dataFromForm)
-  const response = await fetch('/clients', {
+  console.log(e.target.dataset.id)
+  const response = await fetch(`/clients/${e.target.dataset.id}/comments`, {
     method:'POST',
     headers:{
       'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify(dataFromForm)
   });
-  
   if(response.ok){
     const dataFromBack = await response.json();
+    console.log(dataFromForm)
     table.insertAdjacentHTML('beforeend', createDomElement(dataFromBack))
 
     function createDomElement(dataFromBack){
         return(`
         <tr>
-            <td><a href="/clients/${dataFromBack.id}">${dataFromBack.name}</a></td>
-            <td>${dataFromBack.phone}</td>
-            <td>${dataFromBack.email}</td>
+            <td>${dataFromBack.User.firstName} ${dataFromBack.User.lastName}</td>
+            <td>${dataFromBack.User.email}</td>
+            <td>${dataFromBack.comment}</td>
+            <td>${dataFromBack.date}</td>
           </tr>
         `)
     }

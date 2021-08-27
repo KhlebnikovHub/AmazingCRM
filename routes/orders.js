@@ -22,7 +22,7 @@ router.route('/')
           model: OrderStatus,
           as: 'OrderStatus'
         }
-      ],
+        ],
       });
     } catch (error) {
       res.render('error', {
@@ -30,14 +30,14 @@ router.route('/')
       });
     }
     //console.log(order)
-    res.render('order', { order })
+    res.render('order', { order, user: req.session.user_id })
 
   })
 
-  .post( async (req, res) => {
+  .post(async (req, res) => {
     try {
       const newClient = await Orders.create(req.body);
-      const user =await Orders.findOne({
+      const user = await Orders.findOne({
         include: [{
           model: User,
           as: 'User'
@@ -50,20 +50,20 @@ router.route('/')
           model: OrderStatus,
           as: 'OrderStatus'
         }],
-        where:{id:newClient.id}
+        where: { id: newClient.id }
       })
       console.log(user);
       return res.json(user);
     } catch (err) {
       console.log(err);
     }
-  
+
   })
 
 router.route('/:id')
-  .get( async (req, res) => {
-    console.log("id vrvtrb",req.params.id)
-     let thisOrder = await Orders.findAll({
+  .get(async (req, res) => {
+    console.log("id vrvtrb", req.params.id)
+    let thisOrder = await Orders.findAll({
       include: [{
         model: User,
         as: 'User'
@@ -76,24 +76,48 @@ router.route('/:id')
         model: OrderStatus,
         as: 'OrderStatus'
       }
-    ],
-       where: { id: req.params.id }
- 
+      ],
+      where: { id: req.params.id }
+
     })
     let allOrderComment = await OrderComment.findAll({
       include: [{
         model: User,
         as: 'User'
       }
-    ],
+      ],
       where: { id_order: req.params.id }
     })
-  
+    res.locals.id = req.params.id;
     res.locals.thisOrder = thisOrder;
-    res.locals.allOrderComment = allOrderComment; 
-    console.log("lalalala", thisOrder)
-    res.render('thisOrder')
+    res.locals.allOrderComment = allOrderComment;
+    res.render('thisOrder', { user: req.session.user_id })
   })
 
 
+router.post('/:id/comments', async (req, res) => {
+  try {
+    console.log('---------',req.body)
+    const newComment = await OrderComment.create({ ...req.body, id_order: req.params.id });
+    const user = await OrderComment.findAll({
+      include: [{
+        model: User,
+        as: 'User'
+      },
+      {
+        model: Client,
+        as: 'Client'
+      },
+      {
+        model: OrderStatus,
+        as: 'OrderStatus'
+      }],
+      where: { id: newComment.id }
+    })
+    return res.json(user)
+  } catch (err) {
+    console.log(err);
+  }
+
+})
 module.exports = router;

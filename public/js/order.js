@@ -1,4 +1,4 @@
-const Order = document.querySelector('.addOrder');
+
 const Orders = document.forms.addOrder
 console.log(Orders)
 const table = document.querySelector('.responsive-table');

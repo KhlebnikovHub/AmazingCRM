@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     id_client: DataTypes.INTEGER,
     comment: DataTypes.STRING,
-    date: DataTypes.DATEONLY,
+    date:{
+      type:DataTypes.DATEONLY,
+      defaultValue: new Date()
+    } 
   }, {
     sequelize,
     modelName: 'ClientComment',
