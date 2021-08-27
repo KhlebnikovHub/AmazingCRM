@@ -8,6 +8,13 @@ body {
     /* background: #1C1D22; */
 }
 /* ================ Блоки на главной странице =================== */
+
+.adminImg {
+  position: absolute;
+  right: 500px; 
+
+}
+
 .helloUser {
   display: flex;
   flex-wrap: wrap;
