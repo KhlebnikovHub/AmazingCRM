@@ -81,6 +81,14 @@ app.use('/user', userRouter);
 app.use('/', indexRouter);
 app.use(checkUser);
 app.use(checkSuper);
+app.use(async (req, res, next) => {
+  if (req?.session?.passport) {
+    res.locals.name = req.session.passport.user.displayName;
+    res.locals.img = req.session.passport.user.photos[0].value;
+    res.locals.auth = req.session.passport.user?.moderator;
+  }
+  next();
+});
 app.use('/clients', clientsRouter);
 app.use('/orders', ordersRouter);
 app.use('/admin', adminRouter);

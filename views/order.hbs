@@ -1,0 +1,23 @@
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th>Number</th>
+              <th>User</th>
+              <th>client</th>
+              <th>status</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {{#each order}}
+          <tr>
+            <td><a href="/orders/{{this.id}}">{{this.id}}</a></td>
+            <td> {{this.User.firstName}} {{this.User.lastName}} {{this.User.email}}</td>
+            <td> {{this.Client.name}} </td>
+            <td>{{this.OrderStatus.status}}</td>
+
+          </tr>
+          {{/each}}
+        </tbody>
+  
+ </table>

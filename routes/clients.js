@@ -1,42 +1,42 @@
 const router = require('express').Router();
-const {Client}=require('../db/models');
-const {ClientComment}=require('../db/models');
-const {User}=require('../db/models');
+const { Client } = require('../db/models');
+const { ClientComment } = require('../db/models');
+const { User } = require('../db/models');
 
 
-router.get('/',async(req,res)=>{
+router.get('/', async (req, res) => {
   let client;
   try {
-    client = await Client.findAll()
+    client = await Client.findAll();
   } catch (error) {
     res.render('error', {
       message: 'Something went wrong', error: {},
-    })
+    });
   }
-  
-  if (client.length === 0) {
-    res.render('error', {
-      message: 'User not found', error: {},
-    })
-  }
-  res.render('client',  {client} )
+
+  res.render('client', { client })
 })
 
-router.get('/:id',async(req,res)=>{
-  let thisclient=await Client.findOne({where:{id:req.params.id}})
-  //console.log(thisclient)
+router.get('/:id', async (req, res) => {
 
-  let allComment=await ClientComment.findAll({
+  let thisclient = await Client.findAll({
+     where: { id: req.params.id } ,
+     include: [{
+      model: User,
+      as: 'User'
+    }],
+  })
+  let allComment = await ClientComment.findAll({
     include: [{
       model: User,
       as: 'User'
     }],
-    where:{id_client:req.params.id}
+    where: { id_client: req.params.id }
   })
 
-  res.locals.thisclient=thisclient;
-  res.locals.allComment=allComment;
-  console.log("lalalala",allComment)
+  res.locals.thisclient = thisclient;
+  res.locals.allComment = allComment;
+  //console.log("lalalala", allComment)
   res.render('thisClient')
 })
 
