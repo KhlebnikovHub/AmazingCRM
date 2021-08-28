@@ -1,5 +1,5 @@
 const addComment = document.forms.addComment
-
+const table = document.querySelector('.responsive-table');
 
 addComment.addEventListener('submit', async (e) => {
   e.preventDefault()
@@ -17,15 +17,15 @@ addComment.addEventListener('submit', async (e) => {
     const dataFromBack = await response.json();
     console.log(dataFromForm)
     table.insertAdjacentHTML('beforeend', createDomElement(dataFromBack))
-
+    
     function createDomElement(dataFromBack){
         return(`
         <tr>
-            <td>${dataFromBack.User.firstName} ${dataFromBack.User.lastName}</td>
-            <td>${dataFromBack.User.email}</td>
-            <td>${dataFromBack.comment}</td>
-            <td>${dataFromBack.date}</td>
-          </tr>
+        <td>${dataFromBack.User.firstName} ${dataFromBack.User.lastName}</td>
+        <td>${dataFromBack.User.email}</td>
+        <td>${dataFromBack.comment}</td>
+        <td>${dataFromBack.date}</td>
+      </tr>
         `)
     }
   }

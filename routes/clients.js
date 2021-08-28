@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
       message: 'Something went wrong', error: {},
     });
   }
- 
-  res.render('client', { client,user:req.session.user_id})
+
+  res.render('client', { client, user: req.session.user_id })
 })
 
 router.post('/', async (req, res) => {
@@ -43,33 +43,39 @@ router.get('/:id', async (req, res) => {
     }],
     where: { id_client: req.params.id }
   })
-  res.locals.id=req.params.id;
+  res.locals.id = req.params.id;
   res.locals.thisclient = thisclient;
   res.locals.allComment = allComment;
-  res.render('thisClient', { user:req.session.user_id})
+  res.render('thisClient', { user: req.session.user_id })
 })
 
 
 router.post('/:id/comments', async (req, res) => {
   try {
-    const newComment = await ClientComment.create({...req.body, id_client:req.params.id});
-    const user =await ClientComment.findAll({
-        include: [{
-          model: User,
-          as: 'User'
-        },
-        {
-          model: Client,
-          as: 'Client'
-        }],
-        where:{id:newComment.id}
+    const newComment = await ClientComment.create({ ...req.body, id_client: req.params.id });
+    const user = await ClientComment.findOne({
+      include: [{
+        model: User,
+        as: 'User'
+      }],
+      where: { id: newComment.id }
     })
-      return res.json(user)
+    // console.log(user)
+    return res.json(user)
   } catch (err) {
     console.log(err);
   }
-
 })
 
+router.delete('/:id', async (req, res) => {
+ console.log(req.params.id);
+  try {
+    await Client.destroy({ where: { id: req.params.id } });
+    return res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    return res.sendStatus(500)
+  }
+})
 
 module.exports = router;

@@ -93,6 +93,8 @@ app.use(async (req, res, next) => {
 });
 app.use('/clients', clientsRouter);
 app.use('/orders', ordersRouter);
+app.use('/ordersItems', ordersRouter);
+
 app.use(checkAdmin);
 app.use('/admin', adminRouter);
 

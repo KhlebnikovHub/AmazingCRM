@@ -1,5 +1,5 @@
 const addComment = document.forms.addComment
-
+const table = document.querySelector('.responsive-table');
 
 addComment.addEventListener('submit', async (e) => {
   e.preventDefault()
@@ -25,6 +25,7 @@ addComment.addEventListener('submit', async (e) => {
             <td>${dataFromBack.User.email}</td>
             <td>${dataFromBack.comment}</td>
             <td>${dataFromBack.date}</td>
+            
           </tr>
         `)
     }

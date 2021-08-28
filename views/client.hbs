@@ -44,17 +44,22 @@
       <th>Name</th>
       <th>Phone</th>
       <th>Email</th>
+      <th>You can</th>
     </tr>
   </thead>
   <tbody>
-    <div data-postWrapper>
+    <div  >
       {{#each client}}
-      <tr >
+        <tr data-id="{{this.id}}">
         <td><a href="/clients/{{this.id}}">{{this.name}}</a></td>
         <td>{{this.phone}}</td>
         <td>{{this.email}}</td>
+        <td><button>Delite</button>
+        <button>Update</button></td>
       </tr>
+      
       {{/each}}
+      
     </div>
 
   </tbody>

@@ -32,15 +32,18 @@
               <th>Почта комментирующего</th>
               <th>Текст</th>
               <th>Дата</th>
+               <th>You can</th>
           </tr>
         </thead>
         <tbody>
-        {{#each allComment }}
+        {{#each allComment}}
           <tr>
             <td>{{this.User.firstName}} {{this.User.lastName}}</td>
             <td>{{this.User.email}}</td>
             <td>{{this.comment}}</td>
             <td>{{this.date}}</td>
+            <td> <a href="/clients/{{this.id}}/del">Delite</a>
+            <a href="/clients/{{this.id}}/up">Update</a></td>
           </tr>
           {{/each}}
         </tbody>

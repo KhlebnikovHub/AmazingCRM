@@ -97,20 +97,12 @@ router.route('/:id')
 
 router.post('/:id/comments', async (req, res) => {
   try {
-    console.log('---------',req.body)
+    
     const newComment = await OrderComment.create({ ...req.body, id_order: req.params.id });
-    const user = await OrderComment.findAll({
+    const user = await OrderComment.findOne({
       include: [{
         model: User,
         as: 'User'
-      },
-      {
-        model: Client,
-        as: 'Client'
-      },
-      {
-        model: OrderStatus,
-        as: 'OrderStatus'
       }],
       where: { id: newComment.id }
     })

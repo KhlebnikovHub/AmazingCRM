@@ -2,7 +2,6 @@ const Client = document.querySelector('.addClient');
 console.log(Client)
 const table = document.querySelector('.responsive-table');
 console.log(table)
-const $newCli = document.querySelector('[data-postWrapper]')
 
 
 Client.addEventListener('submit', async (e) => {
@@ -31,5 +30,23 @@ Client.addEventListener('submit', async (e) => {
           </tr>
         `)
     }
+  }
+})
+
+table.addEventListener('click', async (e) => {
+  e.preventDefault()
+  if(e.target.tagName === 'BUTTON' && e.target.innerText === 'Delite'){
+      console.log(e.target)
+      const $postWrap = e.target.closest('[data-id]');
+      console.log($postWrap)
+      const postId = e.target.closest('[data-id]').dataset.id
+      console.log('>>>>>', postId);
+      const response = await fetch(`/clients/${postId}`, {
+          method:"DELETE",
+      })
+
+      if(response.ok){
+        $postWrap.remove()
+      }
   }
 })
