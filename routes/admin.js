@@ -13,7 +13,7 @@ router.route('/users')
       users = await User.findAll();
     } catch (error) {
       res.render('error', {
-        message: 'Something went wrong', error: {},
+        message: 'Something went wrong', error: { },
       });
     }
 
@@ -57,10 +57,60 @@ router.route('/users')
 
 router.route('/products')
   .get(async (req, res) => {
-    let products = await Products.findAll();
-
-    res.render('admin/products', { products })
+    let products = await Products.findAll({ include: [{ model: Categories }]});
+    console.log(products);
+    res.render('admin/products', { products });
   })
+  .delete(async (req, res) => {
+    try {
+      let deleted = await Products.destroy({ where: { id: req.body.curId } });
+      return res.json(deleted);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500).end();
+    }
+
+  });
+
+
+  router.route('/products/edit')
+    .post(async (req, res) => {
+      const { curId } = req.body;
+      try {
+      const ourProduct = await Products.findOne({where: { id: curId }, include: [{ model: Categories }] });
+      return res.json(ourProduct);  
+      } catch (error) {
+        console.log(error);
+        return res.sendStatus(500).end();
+      }
+
+    })
+    .patch(async (req, res) => {
+      const { category, description, stock, price, curId } = req.body;
+      try {
+        const edited = await Products.update({ categories_id: category, description, stock, price }, { where: { id: curId } })
+        return res.json({ edited });  
+      } catch (error) {
+        console.log(error);
+        res.sendStatus(500).end();
+      }
+    })
+
+router.route('/products/new')
+  .post(async (req, res) => {
+    try {
+      const { category, description, stock, price } = req.body;
+      const newProduct = await Products.create(
+        { categories_id: category, description, stock, price });
+      const superNewProduct = await Products.findOne({where: { id: newProduct.dataValues.id },
+         include: [{ model: Categories }]});
+      return res.json(superNewProduct);
+    } catch (error) {
+      console.log(error);
+      return res.sendStatus(500).end();
+    }
+  })
+
 
 router.route('/categories')
   .get(async (req, res) => {
@@ -117,9 +167,13 @@ router.post('/categories/new', async (req, res) => {
 })
 
 router.post('/categories/all', async (req, res) => {
-
-  console.log(1421235346346346346346);
-
+  try {
+    const allCategories = await Categories.findAll({ raw: true });
+    return res.json(allCategories);
+  } catch (error) {
+    console.lor(error);
+    return res.sendStatus(500).end();
+  }
 });
 
 

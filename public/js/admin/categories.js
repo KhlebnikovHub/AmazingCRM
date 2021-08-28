@@ -115,8 +115,9 @@ $table.addEventListener('click', async (event) => {
     $closTr.insertAdjacentHTML('beforebegin', `
     <form name="addform">
     <tr  id="addform">
-    <td style="width:40%;"><input type="text" style="width:90%;" name = "category" id = "category"></td>
-    </td>
+    <td style="width:40%;" colspan = "2"><input type="text" name = "category" id = "category"></td>
+    
+    
     <td><button class="waves-effect waves-light btn-large" id = "newAdd">Отправить</button></td>
   </tr>
     </form>
