@@ -16,6 +16,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       client_id: {
         type: Sequelize.INTEGER,
@@ -25,6 +26,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       deliveryPrice: {
         type: Sequelize.INTEGER
@@ -52,6 +54,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

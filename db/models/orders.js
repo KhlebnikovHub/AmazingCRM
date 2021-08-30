@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Client, {
 
         foreignKey:"client_id",
+        onDelete: 'cascade'
       })
       this.hasMany(models.OrderComment, {
         foreignKey: "id_order",
@@ -24,9 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       })
       this.belongsTo(models.User, {
         foreignKey: "user_id",
+        onDelete: 'cascade'
       })
       this.belongsTo(models.OrderStatus, {
         foreignKey: "status_id",
+        onDelete: 'cascade'
       })
     }
   };

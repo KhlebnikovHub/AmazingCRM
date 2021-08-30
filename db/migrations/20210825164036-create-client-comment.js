@@ -16,6 +16,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       id_client: {
         type: Sequelize.INTEGER,
@@ -25,6 +26,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       comment: {
         type: Sequelize.STRING

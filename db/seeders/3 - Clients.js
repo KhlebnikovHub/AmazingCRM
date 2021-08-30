@@ -21,7 +21,7 @@ module.exports = {
       address: "tyb",
       phone: "167890678",
       email: "vh8g@mail.ru",
-      user_id: 2,
+      user_id: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -32,7 +32,7 @@ module.exports = {
       address: "tyvbnmb",
       phone: "1234567898",
       email: "vh76g@mail.ru",
-      user_id: 2,
+      user_id: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }

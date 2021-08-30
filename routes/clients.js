@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newClient = await Client.create(req.body);
+    console.log(newClient)
     return res.json(newClient);
   } catch (err) {
     console.log(err);
@@ -28,13 +29,14 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-
+  console.log("kjhgfsdfgh",req.params)
   let thisclient = await Client.findAll({
-    where: { id: req.params.id },
     include: [{
       model: User,
       as: 'User'
     }],
+    where: { id: req.params.id },
+
   })
   let allComment = await ClientComment.findAll({
     include: [{
@@ -43,10 +45,10 @@ router.get('/:id', async (req, res) => {
     }],
     where: { id_client: req.params.id }
   })
-  res.locals.id = req.params.id;
+  // res.locals.id = req.params.id;
   res.locals.thisclient = thisclient;
   res.locals.allComment = allComment;
-  res.render('thisClient', { user: req.session.user_id })
+  res.render('thisClient', { user: req.session.user_id ,id:req.params.id})
 })
 
 
@@ -60,7 +62,7 @@ router.post('/:id/comments', async (req, res) => {
       }],
       where: { id: newComment.id }
     })
-    // console.log(user)
+    console.log(user)
     return res.json(user)
   } catch (err) {
     console.log(err);
@@ -77,5 +79,38 @@ router.delete('/:id', async (req, res) => {
     return res.sendStatus(500)
   }
 })
+
+// router.put('/:id', async (req, res) => {
+//   console.log("fndnflnkjgbsg")
+//   let entry;
+//   try {
+//     entry = await Client.update(
+//       {
+//       name: req.body.name, 
+//       lastName: req.body.lastName,
+//       fatherland: req.body.fatherland,
+//       address: req.body.address,
+//       phone: req.body.phone,
+//       email: req.body.email
+//       },
+//        {where:{id:req.params.id}, 
+//        returning: true,
+//        plain: true
+//       });
+//       console.log("------------------------",entry)
+//   } catch (error) {
+//     return res.json({ 
+//       isUpdateSuccessful: false, 
+//       errorMessage: 'Не удалось обновить запись в базе данных.' 
+//     });
+//   }
+//   return res.json({ isUpdateSuccessful: true, entryID: entry[1].id });
+// });
+
+// router.get('/:id/edit', async (req, res) => {
+//   let entry = await Client.findOne({where:{id:req.params.id}});
+//   res.render('clients/edit', { entry });
+// });
+
 
 module.exports = router;

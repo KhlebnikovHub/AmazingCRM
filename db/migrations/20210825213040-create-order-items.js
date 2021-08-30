@@ -16,6 +16,7 @@ module.exports = {
           },
           key: "id"
       },
+      onDelete: 'CASCADE'
       },
       product_id: {
         type: Sequelize.INTEGER,
@@ -25,6 +26,7 @@ module.exports = {
           },
           key: "id"
       },
+      onDelete: 'CASCADE'
       },
       count: {
         type: Sequelize.INTEGER

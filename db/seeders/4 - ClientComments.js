@@ -12,7 +12,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        user_id:2,
+        user_id:1,
         id_client:2,
         comment:"i love eat",
         date: new Date(),
@@ -27,7 +27,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },{
-        user_id:2,
+        user_id:1,
         id_client:3,
         comment:"moskva ne rossia",
         date: new Date(),

@@ -16,6 +16,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       description: {
         type: Sequelize.TEXT

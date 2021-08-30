@@ -26,40 +26,73 @@
       <input placeholder="Text" id="Text" type="text" class="validate" name="email">
       <label for="Text">email</label>
     </div>
-  
-      <input  name="user_id" type="hidden" value="{{user}}" >
-      
-    
-    <button class="btn waves-effect waves-light" type="submit" name="action">
-      Submit
-    </button>
+      <input name="user_id" type="hidden" value="{{user}}">
+
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Submit
+      </button>
   </form>
 </div>
+    {{!--<table class="simple-little-table">
+      <thead class="tableTr">
+        <tr>
+          <th class="th">Имя</th>
+          <th class="th">Телефон</th>
+          <th class="th">Email</th>
+          <th class="th"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each client}}
+        <tr>
+          <td class="td">{{this.name}}</td>
+          <td class="td">{{this.phone}}</td>
+          <td class="td">{{this.email}}</td>
+          <td><a href="/clients/{{this.id}}" class="obl">Открыть</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+
+
+      <input name="user_id" type="hidden" value="{{user}}">
+
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">
+        Submit
+      </button>
+  </form>
+</div>--}}
 
 
 
-<table class="responsive-table">
+<table class="simple-little-table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>You can</th>
+      <th class="th">Имя</th>
+      <th class="th">Телефон</th>
+      <th class="th">Email</th>
+      <th class="th">You can</th>
     </tr>
   </thead>
   <tbody>
-    <div  >
+    <div data-postWrapper>
       {{#each client}}
-        <tr data-id="{{this.id}}">
-        <td><a href="/clients/{{this.id}}">{{this.name}}</a></td>
-        <td>{{this.phone}}</td>
-        <td>{{this.email}}</td>
-        <td><button>Delite</button>
-        <button>Update</button></td>
+      <tr data-id="{{this.id}}">
+        <td class="td">{{this.name}}</td>
+        <td class="td">{{this.phone}}</td>
+        <td class="td">{{this.email}}</td>
+        <td>
+        <a href="/clients/{{this.id}}" class="obl">Открыть</a>
+          <a href="/clients/{{this.id}}/del" class="obl">Delite</a>
+          <a href="/clients/{{this.id}}/up" class="obl">Update</a>
+        </td>
+          {{!-- <a href="/clients/{{this.id}}/up" class="obl">Update</a>
+          <a href="/clients/{{this.id}}" class="obl">Del</a> --}}
       </tr>
-      
+
       {{/each}}
-      
+
     </div>
 
   </tbody>

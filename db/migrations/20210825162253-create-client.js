@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING
@@ -34,6 +34,7 @@ module.exports = {
           },
           key: "id"
       },
+      onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

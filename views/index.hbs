@@ -1,22 +1,32 @@
-{{!-- {{#if user}} --}}
 <div class="helloUser">
-  <div class="helloUser-hello">
+  <div class="npAll">
     {{#if name}}
-    <h1>Добро пожаловать,<br>{{name}}!</h1>
-    <h5>{{#if auth}}
-{{else}} <div>Вы зарегистрированы в системе, ожидайте подтверждения регистрации администратором</div>
-{{/if}}</h5>
+    <div class="namePhoto row">
+      <div class="helloUser-hello s6">
+      <h1>Добро пожаловать,<br>{{name}}!</h1>
+    </div>
+    <div>
+    <img src="{{img}}" class="photoUser">
+    </div>
+    </div>
+    {{#if auth}}
+    {{else}}
+    <div class="alert col s12">
+      <h5><strong>Внимание!</strong> Вы зарегистрированы в системе, ожидайте подтверждения регистрации
+        администратором.</h5>
+    </div>
+    {{/if}}
+  </div>
 
-{{else}}
-<h5>Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в Google</a> </h5>
-{{/if}}
+  {{else}}
+  <div class="alert col s12">
+    <h5><strong>Внимание!</strong> Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в
+        Google</a> </h5>
+  </div>
+  {{/if}}
+</div>
 
 {{#if name}}
-  </div>
-  <div class="helloUser-photo">
-    <h1><img src="{{img}}"></h1>
-  </div>
-</div>
 {{#if auth}}
 <div class="heading">
   <h1 class="heading__title">Статистика</h1>
@@ -24,19 +34,14 @@
   </p>
 </div>
 <div class="cards">
-  {{#each allStatus}}
+  {{#each countOrders}}
 
   <div class="card card-3">
     <h3 class="card__title">{{this.status}}</h3>
     <br>
-    <h1 class="card__title">1000</h1>
-    <p class="card__apply">
-      <a class="card__link" href="#">Подробнее<i class="fas fa-arrow-right"></i></a>
-    </p>
+    <h1 class="card__title">{{this.count}}</h1>
   </div>
   {{/each}}
 </div>
 {{/if}}
 {{/if }}
-{{!-- {{else}} <a href="/user/signIn">Войти</a> --}}
-{{!-- {{/if}} --}}

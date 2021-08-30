@@ -16,6 +16,7 @@ module.exports = {
           },
           key: "id"
         },
+        onDelete: 'CASCADE'
       },
       
       id_order: {
@@ -26,6 +27,7 @@ module.exports = {
           },
           key: "id"
       },
+      onDelete: 'CASCADE'
       },
 
       comment: {

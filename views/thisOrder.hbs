@@ -1,20 +1,50 @@
 <script defer src="/js/commentOrder.js"></script>
 
-<h1>Заказ</h1>
 {{#each thisOrder}}
-<h2>Клиент:  {{this.Client.name}} {{this.Client.lastName}} Почта:{{this.Client.email}}</h2>
-<div>Цена доставки: {{this.deliveryPrice}}</div>
-<div>Цена сборки: {{this.assemblyPrice}}</div>
-<div>Дата доставки: {{this.dataDelivery}}</div>
-<div>Дата сборки: {{this.dataAssembly}}</div>
-<div>Бригада доставки: {{this.brigadeDelivery}}</div>
-<div>Бригада сборки: {{this.brigadeAssembly}}</div>
-<div>Статус: {{this.status_id}}</div>
-<div>Создал: {{this.User.firstName}} {{this.User.lastName}} Почта:{{this.User.email}}</div>
+<h2>Заказы</h2>
+<h3>Клиент: {{this.Client.name}} {{this.Client.lastName}}<br>Почта:{{this.Client.email}}</h3>
+
+<table class="simple-little-table">
+  <thead class="tableTr">
+    <tr>
+      <td class="th">Цена доставки:</td>
+      <td class="th">{{this.deliveryPrice}}</td>
+    </tr>
+    <tr>
+      <td class="th">Цена сборки:</td>
+      <td class="th">{{this.assemblyPrice}}</td>
+    </tr>
+    <tr>
+      <td class="th">Дата доставки:</td>
+      <td class="th">{{this.dataDelivery}}</td>
+    </tr>
+    <tr>
+      <td class="th">Дата сборки:</td>
+      <td class="th">{{this.dataAssembly}}</td>
+    </tr>
+    <tr>
+      <td class="th">Бригада доставки:</td>
+      <td class="th">{{this.brigadeDelivery}}</td>
+    </tr>
+    <tr>
+      <td class="th">Бригада сборки:</td>
+      <td class="th">{{this.brigadeAssembly}}</td>
+    </tr>
+    <tr>
+      <td class="th">Статус:</td>
+      <td class="th">{{this.status_id}}</td>
+    </tr>
+    <tr>
+      <td class="th">Создал:</td>
+      <td class="th">{{this.User.firstName}} {{this.User.lastName}}<br>{{this.User.email}}</td>
+    </tr>
+  </thead>
+</table>
 {{/each}}
 
+
 <div class="addComment">
-  <form name="addComment" data-id="{{id}}" action="/clients" method="POST">
+  <form name="addComment" data-id="{{id}}" action="/orders" method="POST">
     <div class="input-field col s4">
       <input placeholder="Title" id="title" type="text" class="validate" name="comment">
       <label for="title">Твой комментарий</label>
@@ -27,8 +57,10 @@
 </div>
 
 
-<h1>Комментарии к заказу</h1>
-<table class="responsive-table">
+<h2 style="text-align:center">Комментарии к заказу</h2>
+
+<table class="simple-little-table table">
+
         <thead>
           <tr>
               <th>Инициалы комментирующего</th>
@@ -40,15 +72,17 @@
         </thead>
         <tbody>
         {{#each allOrderComment }}
-          <tr>
+          <tr data-id="{{this.id}}">
             <td>{{this.User.firstName}} {{this.User.lastName}}</td>
             <td>{{this.User.email}}</td>
             <td>{{this.comment}}</td>
             <td>{{this.date}}</td>
-            <td> <a href="/clients/{{this.id}}/del">Delite</a>
-            <a href="/clients/{{this.id}}/up">Update</a></td>
+            <td> <a href="/orders/{{this.id}}/del">Delite</a>
+            <a href="/orders/{{this.id}}/up">Update</a></td>
           </tr>
           {{/each}}
         </tbody>
-  
- </table>
+
+ </table> 
+
+

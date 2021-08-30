@@ -62,7 +62,6 @@ router.route('/')
 
 router.route('/:id')
   .get(async (req, res) => {
-    console.log("id vrvtrb", req.params.id)
     let thisOrder = await Orders.findAll({
       include: [{
         model: User,
@@ -112,4 +111,41 @@ router.post('/:id/comments', async (req, res) => {
   }
 
 })
+
+router.delete('/:id', async (req, res) => {
+  console.log(req.params.id);
+   try {
+     await Client.destroy({ where: { id: req.params.id } });
+     return res.sendStatus(200)
+   } catch (err) {
+     console.log(err)
+     return res.sendStatus(500)
+   }
+ })
+
+//  router.put('/:id', async (req, res) => {
+//   let entry;
+//   try {
+//     entry = await Client.update({
+//       name: req.body.name, 
+//       lastName: req.body.lastName,
+//       fatherland: req.body.fatherland,
+//       address: req.body.address,
+//       phone: req.body.phone,
+//       email: req.body.email
+//       },
+//        {where:{id:req.params.id}, 
+//        returning: true,
+//        plain: true
+//       });
+ 
+//   } catch (error) {
+//     return res.json({ 
+//       isUpdateSuccessful: false, 
+//       errorMessage: 'Не удалось обновить запись в базе данных.' 
+//     });
+//   }
+//   return res.json({ isUpdateSuccessful: true, entryID: entry });
+// });
+
 module.exports = router;

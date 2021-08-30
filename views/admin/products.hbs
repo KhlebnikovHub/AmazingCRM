@@ -1,0 +1,32 @@
+
+<table class="simple-little-table" id = "userTable">
+        <thead>
+          <tr>
+              <th style="width: 15%;">Категория</th>
+              <th style="width: 25%;">Описание</th>
+              <th style="width: 5%;">Остаток</th>
+              <th style="width: 5%;">Цена</th>
+              <th style="width: 3%;"></th>
+              <th id="addcontainer" style="width: 3%;"><button class="waves-effect waves-light btn-large" id = "addbutton" width="50px" style="">Добавить</button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <div data-did="">
+            <tr data-id="">
+            </tr>
+        {{#each products}}
+          <div data-did="{{this.id}}">
+            <tr data-id="{{this.id}}">
+            <td>{{this.Category.categories}}</td>
+            <td>{{this.description}}</td>
+            <td style="width: 5%;">{{this.stock}}</td>
+            <td>{{this.price}}</td>
+            <td style="width: 3%;"><a id="adminEdit">Редактировать</a></td>
+            <td><a id="adminEdit">Удалить</a></td>
+          </tr>
+          </div>
+          {{/each}}
+        </tbody>
+  
+ </table>
+<script defer src = "/js/admin/products.js"></script>

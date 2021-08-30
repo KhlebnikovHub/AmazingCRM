@@ -42,13 +42,13 @@
   </form>
 </div>
 
-<table class="responsive-table">
+<table class="simple-little-table">
   <thead>
     <tr>
-      <th>Number</th>
-      <th>User</th>
-      <th>client</th>
-      <th>status</th>
+      <th class="th">№ заказа</th>
+      <th class="th">Клиент</th>
+      <th class="th">Менеджер</th>
+      <th class="th">Статус заказа</th>
       <th>You can</th>
 
     </tr>
@@ -56,18 +56,42 @@
   <tbody>
     <div data-postWrapper>
       {{#each order}}
-      <tr>
-        <td><a href="/orders/{{this.id}}">{{this.id}}</a></td>
-        <td> {{this.User.firstName}} {{this.User.lastName}} {{this.User.email}}</td>
-        <td> {{this.Client.name}} </td>
-        <td>{{this.OrderStatus.status}}</td>
-        <td> <a href="/orders/{{this.id}}/del">Delite</a>
-          <a href="/orders/{{this.id}}/up">Update</a>
+      <tr data-id="{{this.id}}">
+        <td class="td">{{this.id}}</td>
+        <td class="td"> {{this.User.firstName}} {{this.User.lastName}} {{this.User.email}}</td>
+        <td class="td"> {{this.Client.name}} </td>
+        <td class="td">{{this.OrderStatus.status}}</td>
+        <td class="td"> 
+          <a href="/orders/{{this.id}}" class="obl">Открыть</a>
+          <a href="/orders/{{this.id}}/del" class="obl">Delite</a>
+          <a href="/orders/{{this.id}}/up" class="obl">Update</a>
         </td>
       </tr>
       {{/each}}
     </div>
 
   </tbody>
+ </table> 
+  {{!-- <table class="simple-little-table">
+    <thead>
+      <tr>
+        <th class="th">№ заказа</th>
+        <th class="th">Клиент</th>
+        <th class="th">Менеджер</th>
+        <th class="th">Статус заказа</th>
+        <th></th>
 
-</table>
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each order}}
+
+      <td class="td">{{this.id}} </td>
+      <td class="td"> {{this.Client.name}} </td>
+      <td class="td"> {{this.User.firstName}} {{this.User.lastName}} <br> {{this.User.email}}</td>
+      <td class="td">{{this.OrderStatus.status}}</td>
+      <td class="td"><a href="/orders/{{this.id}}" class="obl">Открыть</a></td>
+    </tbody>
+
+  </table> --}}

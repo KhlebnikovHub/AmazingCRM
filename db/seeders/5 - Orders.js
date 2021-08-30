@@ -17,7 +17,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        user_id: 2,
+        user_id: 1,
         client_id: 3,
         deliveryPrice: 102,
         assemblyPrice: 59,
@@ -56,7 +56,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        user_id: 2,
+        user_id: 1,
         client_id: 1,
         deliveryPrice: 11,
         assemblyPrice: 1,
