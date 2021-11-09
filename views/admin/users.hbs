@@ -1,0 +1,27 @@
+
+<table class="simple-little-table" id = "userTable">
+        <thead>
+          <tr>
+              <th>Имя</th>
+              <th>Телефон</th>
+              <th>Email</th>
+              <th>Права</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+          <div data-did="{{this.id}}">
+            <tr data-id="{{this.id}}">
+            <td>{{this.lastName}} {{this.firstName}}</td>
+            <td>{{this.phoneNumb}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.type}}</td>
+            <td><a id="adminEdit">Редактировать</a></td>
+            <td><a id="adminEdit">Удалить</a></td>
+          </tr>
+          </div>
+          {{/each}}
+        </tbody>
+  
+ </table>
+<script defer src = "/js/admin/users.js"></script>

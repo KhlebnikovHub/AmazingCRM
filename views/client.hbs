@@ -1,0 +1,21 @@
+<table class="simple-little-table">
+        <thead class="tableTr">
+          <tr>
+              <th class="th">Имя</th>
+              <th class="th">Телефон</th>
+              <th class="th">Email</th>
+              <th class="th"></th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each client}}
+          <tr>
+            <td class="td">{{this.name}}</td>
+            <td class="td">{{this.phone}}</td>
+            <td class="td">{{this.email}}</td>
+            <td><a href="/clients/{{this.id}}" class="obl">Открыть</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+  
+ </table>

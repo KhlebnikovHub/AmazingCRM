@@ -1,0 +1,49 @@
+<div class="helloUser">
+  <div class="npAll">
+    {{#if name}}
+    <div class="namePhoto row">
+      <div>
+        <img src="{{img}}" class="photoUser">
+      </div>
+      <div class="helloUser-hello s6">
+        <h1>Добро пожаловать,<br>{{name}}!</h1>
+      </div>
+    </div>
+    {{#if auth}}
+    {{else}}
+    <div class="alert col s12">
+      <h5><strong>Внимание!</strong> Вы зарегистрированы в системе, ожидайте подтверждения регистрации
+        администратором.</h5>
+    </div>
+    {{/if}}
+  </div>
+
+  {{else}}
+  <div class="alert col s12">
+    <h5><strong>Внимание!</strong> Для работы в системе необходимо пройти <a href="/user/signIn">авторизацию в
+        Google</a> </h5>
+  </div>
+  {{/if}}
+</div>
+
+{{#if name}}
+{{#if auth}}
+<div class="statBox">
+  <div class="heading">
+    <h1 class="heading__title">Статистика</h1>
+    <p class="heading__credits"><a class="heading__link" target="_blank" href="#">по заказам</a>
+    </p>
+  </div>
+  <div class="cards">
+    {{#each countOrders}}
+
+    <div class="card card-3">
+      <h3 class="card__title">{{this.status}}</h3>
+      <br>
+      <h1 class="card__title">{{this.count}}</h1>
+    </div>
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+{{/if }}

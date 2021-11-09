@@ -1,0 +1,27 @@
+<table class="simple-little-table">
+        <thead>
+          <tr>
+              <th class="th">№ заказа</th>
+              <th class="th">Клиент</th>
+              <th class="th">Менеджер</th>
+              <th class="th">Статус заказа</th>
+              <th class="th"></th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+        {{#each order}}
+          <tr>
+            <td class="td">{{this.id}} </td>
+            <td class="td"> {{this.Client.name}} </td>
+            <td class="td"> {{this.User.firstName}} {{this.User.lastName}} <br> {{this.User.email}}</td>
+            <td class="td">{{this.OrderStatus.status}}</td>
+            <td class="td"><a href="/orders/{{this.id}}" class="obl">Открыть</a></td>
+
+
+          </tr>
+          {{/each}}
+        </tbody>
+  
+ </table>
