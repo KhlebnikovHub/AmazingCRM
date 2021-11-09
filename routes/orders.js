@@ -6,63 +6,63 @@ const { OrderStatus } = require('../db/models');
 
 const { OrderComment } = require('../db/models');
 
-router.route('/')
-  .get(async (req, res) => {
-    let order;
-    try {
-      order = await Orders.findAll({
-        include: [{
+router.route('/').get(async (req, res) => {
+  let order;
+  try {
+    order = await Orders.findAll({
+      include: [
+        {
           model: User,
-          as: 'User'
+          as: 'User',
         },
         {
           model: Client,
-          as: 'Client'
+          as: 'Client',
         },
         {
           model: OrderStatus,
-          as: 'OrderStatus'
-        }
+          as: 'OrderStatus',
+        },
       ],
-      });
-    } catch (error) {
-      res.render('error', {
-        message: 'Something went wrong', error: {},
-      });
-    }
-    console.log(order)
-    res.render('order', { order })
+    });
+  } catch (error) {
+    res.render('error', {
+      message: 'Something went wrong',
+      error: {},
+    });
+  }
+  console.log(order);
+  res.render('order', { order });
+});
 
-  })
-
-router.route('/:id')
-  .get( async (req, res) => {
-    console.log("id vrvtrb",req.params.id)
-     let thisOrder = await Orders.findAll({
-      include: [{
+router.route('/:id').get(async (req, res) => {
+  console.log('id vrvtrb', req.params.id);
+  let thisOrder = await Orders.findAll({
+    include: [
+      {
         model: User,
-        as: 'User'
+        as: 'User',
       },
       {
         model: Client,
-        as: 'Client'
+        as: 'Client',
       },
       {
         model: OrderStatus,
-        as: 'OrderStatus'
-      }
+        as: 'OrderStatus',
+      },
     ],
-       where: { id: req.params.id }
- 
-    })
-    let allOrderComment = await OrderComment.findAll({
-      include: [{
+    where: { id: req.params.id },
+  });
+  let allOrderComment = await OrderComment.findAll({
+    include: [
+      {
         model: User,
-        as: 'User'
-      }
+        as: 'User',
+      },
     ],
-      where: { id_order: req.params.id }
-/*       include: [{
+    where: { id_order: req.params.id },
+    /*       include: [{
         model: User,
         as: 'User'
       },
@@ -79,13 +79,12 @@ router.route('/:id')
         as: 'OrderStatus'
       }
     ], */
-    })
-  
-    res.locals.thisOrder = thisOrder;
-    res.locals.allOrderComment = allOrderComment; 
-    console.log("lalalala", thisOrder)
-    res.render('thisOrder')
-  })
+  });
 
+  res.locals.thisOrder = thisOrder;
+  res.locals.allOrderComment = allOrderComment;
+  console.log('lalalala', thisOrder);
+  res.render('thisOrder');
+});
 
 module.exports = router;

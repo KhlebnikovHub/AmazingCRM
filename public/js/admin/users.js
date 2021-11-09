@@ -1,26 +1,25 @@
-
-const $table = document.querySelector("#userTable");
-const $did = document.querySelector("[data-did]");  
+const $table = document.querySelector('#userTable');
+const $did = document.querySelector('[data-did]');
 let curId;
 
-
-
 $table.addEventListener('click', async (event) => {
-  console.log(event.target); 
-  if(event.target.tagName === "A" && event.target.innerText === "Редактировать") {
-    
-    const $closTr = event.target.closest("[data-id]");
+  console.log(event.target);
+  if (
+    event.target.tagName === 'A' &&
+    event.target.innerText === 'Редактировать'
+  ) {
+    const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
     $closTr.innerHTML = ``;
-    
+
     const response = await fetch('/admin/users', {
       method: 'POST',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
     });
     let dataBack;
-    if(response.ok) {
+    if (response.ok) {
       dataBack = await response.json();
       console.log(dataBack);
     }
@@ -48,31 +47,37 @@ $table.addEventListener('click', async (event) => {
      
     `;
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var elems = document.querySelectorAll('select');
       var instances = M.FormSelect.init(elems);
     });
 
     const newEdit = document.querySelector('#newEdit');
-   
-   
 
     newEdit.addEventListener('click', async (event) => {
       event.preventDefault();
-      const $editForm = document.querySelector("#editform");  
-      const username = document.querySelector("#username").value; 
-      const phoneNumb = document.querySelector("#phoneNumb").value; 
-      const email = document.querySelector("#email").value; 
-      const superselect = document.querySelector("#superselect").value; 
+      const $editForm = document.querySelector('#editform');
+      const username = document.querySelector('#username').value;
+      const phoneNumb = document.querySelector('#phoneNumb').value;
+      const email = document.querySelector('#email').value;
+      const superselect = document.querySelector('#superselect').value;
       const editResponse = await fetch('/admin/users', {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json;charset=utf-8' },
-        body: JSON.stringify({ username, phoneNumb, email, superselect, curId }),
+        body: JSON.stringify({
+          username,
+          phoneNumb,
+          email,
+          superselect,
+          curId,
+        }),
       });
 
-      if(editResponse.ok) {
+      if (editResponse.ok) {
         const editted = await editResponse.json();
-        $table.insertAdjacentHTML('beforeend', `
+        $table.insertAdjacentHTML(
+          'beforeend',
+          `
         <tbody>
         
           <div data-did="${editted.id}">
@@ -87,35 +92,29 @@ $table.addEventListener('click', async (event) => {
           </div>
           
         </tbody>
-        `);
+        `
+        );
         let trtr = document.querySelector(`tr[data-id="${curId}"]`);
         console.log(trtr);
         trtr.remove();
       }
-
-    })
-
-    
-
+    });
   }
 
-  if(event.target.tagName === "A" && event.target.innerText === "Удалить") {
-
-    const $closTr = event.target.closest("[data-id]");
+  if (event.target.tagName === 'A' && event.target.innerText === 'Удалить') {
+    const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
-    
+
     const response = await fetch('/admin/users', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
     });
     let dataBack;
-    if(response.ok) {
+    if (response.ok) {
       dataBack = await response.json();
       $closTr.remove();
       console.log(dataBack);
     }
-    
   }
-
 });

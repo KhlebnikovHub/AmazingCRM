@@ -1,31 +1,31 @@
-const $table = document.querySelector("#userTable");
-const $did = document.querySelector("[data-did]");  
+const $table = document.querySelector('#userTable');
+const $did = document.querySelector('[data-did]');
 let curId;
-$addButton = document.querySelector("#addbutton"); 
+$addButton = document.querySelector('#addbutton');
 
 $table.addEventListener('click', async (event) => {
-  console.log(event.target); 
-  if(event.target.tagName === "A" && event.target.innerText === "Редактировать") {
-    
-    const $closTr = event.target.closest("[data-id]");
+  if (
+    event.target.tagName === 'A'
+    && event.target.innerText === 'Редактировать'
+  ) {
+    const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
-    console.log($closTr, 'TRRRRRRRRRR');
-    $closTr.innerHTML = ``;
-    
+    $closTr.innerHTML = '';
+
     const response = await fetch('/admin/categories', {
       method: 'POST',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
     });
     let dataBack;
-    if(response.ok) {
+    if (response.ok) {
       dataBack = await response.json();
       console.log(dataBack);
     }
 
     $closTr.innerHTML = `
-      
+
       <form name="editform" >
       <tr id = "editform">
       <td style="width:40%;"><input type="text" value="${dataBack.categories}" style="width:90%;" name = "category" id = "category"></td>
@@ -34,34 +34,34 @@ $table.addEventListener('click', async (event) => {
       <td><button class="waves-effect waves-light btn-large" id = "newEdit">Изменить</button></td>
     </tr>
       </form>
-     
+
     `;
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems);
+    document.addEventListener('DOMContentLoaded', () => {
+      const elems = document.querySelectorAll('select');
+      const instances = M.FormSelect.init(elems);
     });
 
     const newEdit = document.querySelector('#newEdit');
-   
-   
 
     newEdit.addEventListener('click', async (event) => {
       event.preventDefault();
-      const $editForm = document.querySelector("#editform");  
-      const category = document.querySelector("#category").value; 
-      
+      const $editForm = document.querySelector('#editform');
+      const category = document.querySelector('#category').value;
+
       const editResponse = await fetch('/admin/categories', {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json;charset=utf-8' },
         body: JSON.stringify({ category, curId }),
       });
 
-      if(editResponse.ok) {
+      if (editResponse.ok) {
         const editted = await editResponse.json();
-        $table.insertAdjacentHTML('beforeend', `
+        $table.insertAdjacentHTML(
+          'beforeend',
+          `
         <tbody>
-        
+
           <div data-did="${editted.id}">
             <tr data-id="${editted.id}">
             <td>${editted.categories}</td>
@@ -69,50 +69,47 @@ $table.addEventListener('click', async (event) => {
             <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
-          
+
         </tbody>
-        `);
-        let trtr = document.querySelector(`tr[data-id="${curId}"]`);
+        `,
+        );
+        const trtr = document.querySelector(`tr[data-id="${curId}"]`);
         console.log(trtr);
         trtr.remove();
       }
-
-    })
-
-    
-
+    });
   }
 
-
-  if(event.target.tagName === "A" && event.target.innerText === "Удалить") {
-
-    const $closTr = event.target.closest("[data-id]");
+  if (event.target.tagName === 'A' && event.target.innerText === 'Удалить') {
+    const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
-    
+
     const response = await fetch('/admin/categories', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json;charset=utf-8' },
       body: JSON.stringify({ curId }),
     });
     let dataBack;
-    if(response.ok) {
+    if (response.ok) {
       dataBack = await response.json();
       $closTr.remove();
       console.log(dataBack);
     }
-    
   }
 
- 
-  if(event.target.tagName === "BUTTON" && event.target.innerText === "ДОБАВИТЬ") {
-
-    const $closTr = document.querySelector("[data-id]");
+  if (
+    event.target.tagName === 'BUTTON'
+    && event.target.innerText === 'ДОБАВИТЬ'
+  ) {
+    const $closTr = document.querySelector('[data-id]');
     curId = $closTr.dataset.id;
-     
-    $addContainer = document.querySelector("#addcontainer")
-    $addButton.disabled = "true";
-    
-    $closTr.insertAdjacentHTML('beforebegin', `
+
+    $addContainer = document.querySelector('#addcontainer');
+    $addButton.disabled = 'true';
+
+    $closTr.insertAdjacentHTML(
+      'beforebegin',
+      `
     <form name="addform">
     <tr  id="addform">
     <td style="width:40%;"><input type="text" style="width:90%;" name = "category" id = "category"></td>
@@ -120,55 +117,42 @@ $table.addEventListener('click', async (event) => {
     <td><button class="waves-effect waves-light btn-large" id = "newAdd">Отправить</button></td>
   </tr>
     </form>
-    `);
+    `,
+    );
 
-    const newAdd = document.querySelector("#newAdd");
+    const newAdd = document.querySelector('#newAdd');
 
     newAdd.addEventListener('click', async (event) => {
-      const category = document.querySelector("#category").value; 
-      
+      const category = document.querySelector('#category').value;
+
       const response = await fetch('/admin/categories/new', {
         method: 'POST',
         headers: { 'Content-type': 'application/json;charset=utf-8' },
         body: JSON.stringify({ category }),
       });
       let dataBack;
-      if(response.ok) {
+      if (response.ok) {
         dataBack = await response.json();
         console.log(dataBack);
       }
-       
-      $closTr.insertAdjacentHTML('beforebegin', `
+
+      $closTr.insertAdjacentHTML(
+        'beforebegin',
+        `
       <div data-did="${dataBack[0].id}">
             <tr data-id="${dataBack[0].id}">
             <td>${dataBack[0].categories}</td>
-      
+
             <td style="width:10%"><a id="adminEdit">Редактировать</a></td>
             <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
-      `);
+      `,
+      );
 
-      $addForm = document.querySelector("#addform");
+      $addForm = document.querySelector('#addform');
       $addForm.remove();
-      $addButton.disabled = "";   
-
-    })
-
- 
-
-
-
-  
-
-    
-   
-    
+      $addButton.disabled = '';
+    });
   }
-  
-
-
-
 });
-
-
