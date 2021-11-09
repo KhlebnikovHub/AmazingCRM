@@ -54,4 +54,4 @@ CRM Система для продажи мебельной продукции.
 ![products](https://github.com/KhlebnikovHub/AmazingCRM/blob/master/public/images/products.png)
 
 <h4 align="center">В проете использовались технологии:
-Node.js, Express, PassportJS, Redis, Sequelize, PostgreSQL.</h4>
+Node.js, Express, PassportJS, Redis, Handlebars, Sequelize, PostgreSQL.</h4>
