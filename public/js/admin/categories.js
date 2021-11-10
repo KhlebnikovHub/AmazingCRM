@@ -4,10 +4,7 @@ let curId;
 $addButton = document.querySelector('#addbutton');
 
 $table.addEventListener('click', async (event) => {
-  if (
-    event.target.tagName === 'A'
-    && event.target.innerText === 'Редактировать'
-  ) {
+  if (event.target.tagName === 'A' && event.target.innerText === 'Редактировать') {
     const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
@@ -21,7 +18,6 @@ $table.addEventListener('click', async (event) => {
     let dataBack;
     if (response.ok) {
       dataBack = await response.json();
-      console.log(dataBack);
     }
 
     $closTr.innerHTML = `
@@ -71,10 +67,9 @@ $table.addEventListener('click', async (event) => {
           </div>
 
         </tbody>
-        `,
+        `
         );
         const trtr = document.querySelector(`tr[data-id="${curId}"]`);
-        console.log(trtr);
         trtr.remove();
       }
     });
@@ -93,14 +88,10 @@ $table.addEventListener('click', async (event) => {
     if (response.ok) {
       dataBack = await response.json();
       $closTr.remove();
-      console.log(dataBack);
     }
   }
 
-  if (
-    event.target.tagName === 'BUTTON'
-    && event.target.innerText === 'ДОБАВИТЬ'
-  ) {
+  if (event.target.tagName === 'BUTTON' && event.target.innerText === 'ДОБАВИТЬ') {
     const $closTr = document.querySelector('[data-id]');
     curId = $closTr.dataset.id;
 
@@ -117,7 +108,7 @@ $table.addEventListener('click', async (event) => {
     <td><button class="waves-effect waves-light btn-large" id = "newAdd">Отправить</button></td>
   </tr>
     </form>
-    `,
+    `
     );
 
     const newAdd = document.querySelector('#newAdd');
@@ -133,7 +124,6 @@ $table.addEventListener('click', async (event) => {
       let dataBack;
       if (response.ok) {
         dataBack = await response.json();
-        console.log(dataBack);
       }
 
       $closTr.insertAdjacentHTML(
@@ -147,7 +137,7 @@ $table.addEventListener('click', async (event) => {
             <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
-      `,
+      `
       );
 
       $addForm = document.querySelector('#addform');

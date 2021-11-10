@@ -7,8 +7,7 @@ router.route('/').get(initUser, async (req, res) => {
   if (req?.session?.passport) {
     res.locals.name = req.session.passport.user.displayName;
     res.locals.img = req.session.passport.user.photos[0].value;
-    res.locals.auth =
-      req.session.passport.user?.moderator || req.session.passport.user?.admin;
+    res.locals.auth = req.session.passport.user?.moderator || req.session.passport.user?.admin;
     res.locals.admin = req.session.passport.user?.admin;
   }
   const awaitDelivery = await Orders.findAll({
@@ -39,7 +38,6 @@ router.route('/').get(initUser, async (req, res) => {
     ...el,
     count: allStatusesCount[i],
   }));
-  console.log(countOrders);
   res.render('index', { countOrders });
 });
 module.exports = router;

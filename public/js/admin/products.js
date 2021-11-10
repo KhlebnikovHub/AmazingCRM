@@ -4,12 +4,7 @@ let curId;
 $addButton = document.querySelector('#addbutton');
 
 $table.addEventListener('click', async (event) => {
-  console.log(event.target.tagName);
-
-  if (
-    event.target.tagName === 'BUTTON' &&
-    event.target.innerText === 'ДОБАВИТЬ'
-  ) {
+  if (event.target.tagName === 'BUTTON' && event.target.innerText === 'ДОБАВИТЬ') {
     const $closTr = document.querySelector('[data-id]');
     curId = $closTr.dataset.id;
 
@@ -24,7 +19,6 @@ $table.addEventListener('click', async (event) => {
     let dataBack;
     if (response.ok) {
       dataBack = await response.json();
-      console.log(dataBack);
     }
 
     $closTr.insertAdjacentHTML(
@@ -61,10 +55,8 @@ $table.addEventListener('click', async (event) => {
         headers: { 'Content-type': 'application/json;charset=utf-8' },
         body: JSON.stringify({ category }),
       });
-      let dataBack;
       if (response.ok) {
-        dataBack = await response.json();
-        console.log(dataBack);
+        const dataBack = await response.json();
       }
 
       $closTr.insertAdjacentHTML(
@@ -73,7 +65,7 @@ $table.addEventListener('click', async (event) => {
     <div data-did="${dataBack[0].id}">
           <tr data-id="${dataBack[0].id}">
           <td>${dataBack[0].categories}</td>
-    
+
           <td style="width:10%"><a id="adminEdit">Редактировать</a></td>
           <td><a id="adminEdit">Удалить</a></td>
         </tr>

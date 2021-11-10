@@ -3,11 +3,7 @@ const $did = document.querySelector('[data-did]');
 let curId;
 
 $table.addEventListener('click', async (event) => {
-  console.log(event.target);
-  if (
-    event.target.tagName === 'A' &&
-    event.target.innerText === 'Редактировать'
-  ) {
+  if (event.target.tagName === 'A' && event.target.innerText === 'Редактировать') {
     const $closTr = event.target.closest('[data-id]');
     curId = $closTr.dataset.id;
     const $prev = document.querySelector(`[data-did="${curId}"]`);
@@ -21,11 +17,10 @@ $table.addEventListener('click', async (event) => {
     let dataBack;
     if (response.ok) {
       dataBack = await response.json();
-      console.log(dataBack);
     }
 
     $closTr.innerHTML = `
-      
+
       <form name="editform" >
       <tr id = "editform">
       <td style="width:25%;"><input type="text" value="${dataBack.lastName} ${dataBack.firstName}" name="username" id = "username"></td>
@@ -39,17 +34,17 @@ $table.addEventListener('click', async (event) => {
       <option value="moderator">Менеджер</option>
       <option value="admin">Админ</option>
       </select>
-      
+
       </td>
       <td><button class="waves-effect waves-light btn-large" id = "newEdit">Изменить</button></td>
     </tr>
       </form>
-     
+
     `;
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('select');
-      var instances = M.FormSelect.init(elems);
+    document.addEventListener('DOMContentLoaded', () => {
+      const elems = document.querySelectorAll('select');
+      const instances = M.FormSelect.init(elems);
     });
 
     const newEdit = document.querySelector('#newEdit');
@@ -79,7 +74,7 @@ $table.addEventListener('click', async (event) => {
           'beforeend',
           `
         <tbody>
-        
+
           <div data-did="${editted.id}">
             <tr data-id="${editted.id}">
             <td>${editted.lastName} ${editted.firstName}</td>
@@ -90,12 +85,11 @@ $table.addEventListener('click', async (event) => {
             <td><a id="adminEdit">Удалить</a></td>
           </tr>
           </div>
-          
+
         </tbody>
         `
         );
-        let trtr = document.querySelector(`tr[data-id="${curId}"]`);
-        console.log(trtr);
+        const trtr = document.querySelector(`tr[data-id="${curId}"]`);
         trtr.remove();
       }
     });
@@ -114,7 +108,6 @@ $table.addEventListener('click', async (event) => {
     if (response.ok) {
       dataBack = await response.json();
       $closTr.remove();
-      console.log(dataBack);
     }
   }
 });

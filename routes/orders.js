@@ -31,13 +31,11 @@ router.route('/').get(async (req, res) => {
       error: {},
     });
   }
-  console.log(order);
   res.render('order', { order });
 });
 
 router.route('/:id').get(async (req, res) => {
-  console.log('id vrvtrb', req.params.id);
-  let thisOrder = await Orders.findAll({
+  const thisOrder = await Orders.findAll({
     include: [
       {
         model: User,
@@ -54,7 +52,7 @@ router.route('/:id').get(async (req, res) => {
     ],
     where: { id: req.params.id },
   });
-  let allOrderComment = await OrderComment.findAll({
+  const allOrderComment = await OrderComment.findAll({
     include: [
       {
         model: User,
@@ -83,7 +81,6 @@ router.route('/:id').get(async (req, res) => {
 
   res.locals.thisOrder = thisOrder;
   res.locals.allOrderComment = allOrderComment;
-  console.log('lalalala', thisOrder);
   res.render('thisOrder');
 });
 
